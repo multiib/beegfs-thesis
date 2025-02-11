@@ -1,0 +1,12 @@
+\chapter{Methodology}
+
+\section{Evaluation of IPoPCIe Transfer Speeds}
+
+To evaluate the transfer speeds for IP over PCIe (IPoPCIe), a series of tests were conducted using the \textbf{dd} command to measure raw data transfer rates. Additional tools such as \textbf{sar} and \textbf{iotop} were employed to monitor disk activity and obtain separate readings for each disk’s transfer speed during the tests. These tools provided insights into system resource utilization and disk performance during the evaluation.
+
+The testing environment utilized BeeGFS version 7.4.5, an official release distributed as a precompiled Debian package. No modifications were made to the BeeGFS codebase to ensure the results accurately reflect the performance of the unaltered software under standard conditions. This approach ensures that the evaluation is representative of real-world scenarios where users deploy BeeGFS without custom optimizations or alterations.
+
+The results from these tests serve as a baseline for understanding the potential benefits and limitations of IPoPCIe in high-performance computing environments, particularly when compared to other interconnect technologies.
+
+\section{BeeGFS build}
+

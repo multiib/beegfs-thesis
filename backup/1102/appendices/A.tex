@@ -1,0 +1,83 @@
+\chapter{Testbed Setup and Configuration}
+Should be in methodology?
+\section{Overview}
+This testbed comprises two identical nodes, each equipped with an Intel i5-4590 CPU, 8 GB of RAM, a 4 TB HDD, and a 250 GB NVMe SSD. Both nodes run Ubuntu 22.04.5 on the 6.8.0-48-generic kernel, ensuring consistency in the software environment. The storage configuration separates BeeGFS metadata (ext4) from data (XFS). The nodes are connected by ethernet and PCIe over Dolphin Interconnects.
+\section{Test System Specification}
+\begin{table}[htbp]
+    \centering
+    % First minipage for Node 1
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \caption{Node 17 Specifications}
+        \label{tab:node1_specs}
+        \begin{tabular}{lp{2.5cm}}
+            \toprule
+            \textbf{Category} & \textbf{Details} \\
+            \midrule
+            Model & MSI Z97-G55 \\
+            CPU Model & Intel i5-4590 \\
+            Cores & 4 \\
+            Thread/core & 1 \\
+            Memory & 8GB \\
+            Storage &  \\
+            NIC  &  \\
+            OS & Ubuntu 22.04.5 \\
+            Kernel Version & 6.8.0-48-generic \\
+            BeeGFS Version &  \\
+            RDMA Stack &  \\
+            Other SW &  \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    % Second minipage for Node 2
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \caption{Node 18 Specifications}
+        \label{tab:node2_specs}
+        \begin{tabular}{lp{2.5cm}}
+            \toprule
+            \textbf{Category} & \textbf{Details} \\
+            \midrule
+            Model & MSI Z97-G55 \\
+            CPU Model & Intel i5-4590 \\
+            Cores & 4 \\
+            Thread/core & 1 \\
+            Memory & 8GB \\
+            Storage &  \\
+            NIC &  \\
+            OS & Ubuntu 22.04.5 \\
+            Kernel Version & 6.8.0-48-generic \\
+            BeeGFS Version &  \\
+            RDMA Stack &  \\
+            Other SW &  \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+\end{table}
+\section{Storage}
+\begin{table}[htbp]
+    \centering
+    \caption{Storage Configuration}
+    \label{tab:storage_config}
+    \begin{tabular}{llp{2.5cm}lp{4cm}}
+        \toprule
+        \textbf{Device} & \textbf{Type} & \textbf{Size} & \textbf{Filesystem} & \textbf{Purpose} \\
+        \midrule
+        sda1 & Partition & 37.3 GB & ext4 & OS or miscellaneous data \\
+        sda2 & Partition & 149 GB & ext4 & BeeGFS metadata \\
+        sda3 & Partition & 3.5 TB & XFS & BeeGFS data \\
+        nvme0n1 & NVMe SSD & 232.9 GB & ext4 & OS and software installations \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\noindent
+The storage configuration for the BeeGFS setup comprises a 4 TB spinning disk divided into three partitions, with \texttt{/dev/sda2} allocated for metadata and \texttt{/dev/sda3} for data. The use of XFS for the data partition supports the high I/O demands of parallel file systems, while ext4 on the metadata partition provides stability and compatibility. This separation is critical to achieving optimal performance, as metadata operations typically involve different access patterns than bulk data. Additionally, a 250 GB NVMe SSD is used for the operating system and other critical software, ensuring low latency for system operations.
+
+\section{Network Interconnect Specifications}
+\subsection{Ethernet}
+
+\subsection{DIS}
+Both hosts use the MXH930 PCIe 4.0 NTB Host Adapter.
+\section{BeeGFS Build}
