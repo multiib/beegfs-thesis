@@ -27,29 +27,24 @@ Y_SCALE = 'linear'
 
 # Labels (legend)
 LABELS = [
-    'Ethernet',
     'IPoPCIe',
-    # 'Ethernet (Sequential)',
+    'Ethernet',
     # 'IPoPCIe (Sequential)',
-    # 'Ethernet (Random)',
+    # 'Ethernet (Sequential)',
     # 'IPoPCIe (Random)',
-]
-# Define a list of colors (hex codes, named colors, etc.)
-custom_colors = [
-    "#fab900",  # BeeGFS
-    "#389e9b",  # Dolphin
-    "#dd0001",  # UiO
-    "#00a087",  # Ceph
-    "#B900FA",  # Lighter yellow variant (mix of #fab900 with white)
-    "#9B389E",  # Lighter teal variant (softer, pastel teal)
-    "#BEFA00",  # Lighter red variant (softer red)
-    "#e5a900",  # Darker yellow variant (richer, more saturated yellow)
-    "#317c7a",  # Darker teal variant (deeper teal)
-    "#b50000"   # Darker red variant (more intense red)
+    # 'Ethernet (Random)',
 ]
 
-# Set the custom color cycle globally
+# Custom colors
+custom_colors = [
+    "#389e9b",  # Dolphin
+    "#fab900",  # BeeGFS
+    "#dd0001",  # UiO
+    "#df47be",  # Pink
+]
+
 plt.rcParams['axes.prop_cycle'] = cycler(color=custom_colors)
+
 # Command line arguments
 if len(sys.argv) < 3:
     exit('Usage: python tp_vs_id.py <out_file_name> <job1> [<job2> ...]')
@@ -104,8 +99,6 @@ plt.style.use('seaborn-v0_8-paper')
 ax = plt.gca()  # Get current axes
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-
-
 
 plt.xlabel(X_LABEL)
 plt.ylabel(Y_LABEL)

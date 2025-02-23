@@ -99,7 +99,10 @@ if [[ $out_file_name != *.* ]]; then
   out_file_name="${out_file_name}${OUT_FILE_EXTENSION}"
 fi
 
-# --- Step 4: Run the plot script ---
+# --- Step 4: Get the title for the plot ---
+read -p "Enter the title for the plot: " title
+
+# --- Step 5: Run the plot script with the JSON files as arguments ---
 # Build an array of JSON files (one for each job)
 json_files=()
 for job in "$@"; do
@@ -108,7 +111,7 @@ done
 
 echo -e "\nRunning plot script: ${PLOT_DIR}/${plot_script}"
 # Run the plot script with the JSON files as arguments
-python3 "${PLOT_DIR}/${plot_script}" "${out_file_name}" "${json_files[@]}"
+python3 "${PLOT_DIR}/${plot_script}" "${out_file_name}" "${title}" "${json_files[@]}"
 
 
 
