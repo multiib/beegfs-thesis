@@ -15,8 +15,8 @@ palette = {
     "eth2":   "#FFC92E",  # BeeGFS light
     "dis":    "#389E9B",  # Dolphin
     "dis2":   "#4ABFBB",  # Dolphin light
-    "ssock":  "#DD0001",  # UiO
-    "ssock2": "#FF1112",  # UiO light
+    "ssocks":  "#DD0001", # UiO
+    "ssocks2": "#FF1112", # UiO light
     "sisci":  "#CF24AA",  # Pink
     "sisci2": "#DF47BE",  # Pink light
     "ib":     "#76B900",  # Nvidia

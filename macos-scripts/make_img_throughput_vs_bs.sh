@@ -4,43 +4,23 @@
 
 
 
+
+
+
+
+
 # --- Configuration ---
 # Local path and directories
 FIO_PATH="/Users/benjaminborge/thesis/fio"
 
-DATA_DIR="${FIO_PATH}/data/throughput_vs_bs"
+DATA_DIR="${FIO_PATH}/out/throughput_vs_bs"
 IMG_DIR="${FIO_PATH}/img/throughput_vs_bs"
 PLOT_DIR="${FIO_PATH}/plot"
 
 
 
 
-# --- Process options ---
-transfer=false
-while getopts ":t" opt; do
-  case $opt in
-    t)
-        transfer=true
-      ;;
-    \?)
-      echo "Invalid option: -$OPTARG" >&2
-      exit 1
-      ;;
-  esac
-done
-shift $((OPTIND-1))
 
-
-
-# --- Transfer files only if requested---
-
-if $transfer; then
-  rsync -avz --progress \
-  benjabor@mpg-2014-18:/home/benjabor/fio/out/throughput_vs_bs \
-  /Users/benjaminborge/thesis/fio/data
-
-    exit 0
-fi
 
 
 
