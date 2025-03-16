@@ -1,0 +1,74 @@
+###############################################################################
+# macOS-specific files
+###############################################################################
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Temporary files created by macOS
+.Spotlight-V100
+.Trashes
+
+###############################################################################
+# Ubuntu (optional/customize as needed)
+###############################################################################
+# [No default Ubuntu OS files to ignore. Add any system-specific files here.]
+# For example, if you want to exclude certain system logs, you can add them:
+# /var/log/
+
+###############################################################################
+# Bash/user-related files
+###############################################################################
+# Ignore personal shell config/history if it exists in your repo
+.bash_history
+.bash_profile
+.bashrc
+.bash_logout
+
+###############################################################################
+# Python
+###############################################################################
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+*.egg-info/
+.egg/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.env/
+.venv/
+venv/
+ENV/
+env/
+venv.bak/
+
+# pyenv
+.python-version
+
+# Test / coverage tools
+.pytest_cache/
+cover/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+###############################################################################
+# End of .gitignore
+###############################################################################
