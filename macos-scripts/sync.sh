@@ -12,15 +12,21 @@ sync-18-fio() {
     local FIO_PATH="$HOME/thesis/fio/"
     local REMOTE_PATH="benjabor@mpg18:/home/benjabor/fio/"
 
-    # --- Step A: Pull from remote to local ---
+
     echo "Pulling from $REMOTE_PATH -> $FIO_PATH ..."
     rsync -avz --exclude='.DS_Store' "$REMOTE_PATH/" "$FIO_PATH/" || {
         echo "Pull failed. Aborting entire sync." >&2
         return 1
     }
 
+    echo "Pushing from $FIO_PATH -> $REMOTE_PATH ..."
+    rsync -avz --exclude='.DS_Store' "$FIO_PATH/" "$REMOTE_PATH/" || {
+        echo "Push failed. Check the logs/errors." >&2
+        return 1
+    }
 
-    echo "Sync complete! (Pulled then pushed to $REMOTE_18)."
+    
+
 }
 
 sync-17-scripts() {
@@ -34,7 +40,6 @@ sync-17-scripts() {
         return 1
     }
 
-    echo "Sync complete! (Pulled then pushed to $REMOTE_17)."
 }
 
 sync-18-scripts() {
@@ -50,7 +55,6 @@ sync-18-scripts() {
         return 1
     }
 
-    echo "Sync complete! (Pulled then pushed to $REMOTE_18)."
 }
 
 

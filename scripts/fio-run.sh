@@ -7,7 +7,7 @@ OUTPUT_DIR="$FIO_PATH/out"
 
 # --- Usage Check ---
 if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <job_subdir> <suffix>"
+  echo "Usage: $0 <job> <interface>"
   exit 1
 fi
 
