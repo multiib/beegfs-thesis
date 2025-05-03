@@ -12,6 +12,7 @@ ALL_COMPONENTS=("${MAIN_COMPONENTS[@]}" "mon" "ctl" "fsck" "event-listener")
 
 swap_module() {
     local binary_dir="$1"
+    local use_ssocks_family="$2"
 
     echo "Unloading old kernel module..."
     sudo rmmod beegfs 2>/dev/null || echo "Module not loaded or already removed"
@@ -23,13 +24,22 @@ swap_module() {
     sudo depmod -a
 
     echo "Loading new module..."
-    sudo modprobe beegfs
+    if [[ "$use_ssocks_family" == "true" ]]; then
+        local family
+        family=$(cat /proc/net/af_ssocks/family)
+        echo "Using ssocks_family=$family"
+        sudo modprobe beegfs ssocks_family="$family"
+    else
+        echo "Using default family"
+        sudo modprobe beegfs
+    fi
 
     echo "Verifying new module version..."
     modinfo beegfs | grep -E "filename|version"
 
     echo "BeeGFS module swap completed successfully!"
 }
+
 
 swap_binary() {
     local binary="$1"
@@ -83,21 +93,21 @@ beegfs-ssock-swap() {
 
     case "$component" in
         client)
-            swap_module "$BEENGFS_SSOCK_BINARIES_DIR"
+            swap_module "$BEENGFS_SSOCK_BINARIES_DIR" true
             ;;
         meta|storage|mgmtd|helperd)
             swap_binary "beegfs-$component" "$BEENGFS_SSOCK_BINARIES_DIR"
             ;;
         all)
             echo "Swapping main components: ${MAIN_COMPONENTS[*]}"
-            swap_module "$BEENGFS_SSOCK_BINARIES_DIR"
+            swap_module "$BEENGFS_SSOCK_BINARIES_DIR" true
             for binary in "${MAIN_COMPONENTS[@]:1}"; do
                 swap_binary "beegfs-$binary" "$BEENGFS_SSOCK_BINARIES_DIR"
             done
             ;;
         realall)
             echo "Swapping all components: ${ALL_COMPONENTS[*]}"
-            swap_module "$BEENGFS_SSOCK_BINARIES_DIR"
+            swap_module "$BEENGFS_SSOCK_BINARIES_DIR" true
             for binary in "${ALL_COMPONENTS[@]:1}"; do
                 swap_binary "beegfs-$binary" "$BEENGFS_SSOCK_BINARIES_DIR"
             done
@@ -108,3 +118,4 @@ beegfs-ssock-swap() {
             ;;
     esac
 }
+

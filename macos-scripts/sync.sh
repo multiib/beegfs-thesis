@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 sync-all() {
-    sync-18-fio
+    # sync-18-fio
     sync-17-scripts
     sync-18-scripts
 }

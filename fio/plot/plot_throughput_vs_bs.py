@@ -141,16 +141,16 @@ plt.style.use(STYLE)
 ax = plt.gca()  # Get current axes
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-plt.xlabel(X_LABEL)
-plt.ylabel(Y_LABEL)
-plt.title(TITLE)
+plt.xlabel(X_LABEL, fontsize=12)
+plt.ylabel(Y_LABEL, fontsize=12)
+# plt.title(TITLE)
 plt.grid(True)
 plt.xscale(X_SCALE)
 plt.yscale(Y_SCALE)
 
 
 # Add a legend if more than one job was plotted.
-if num_jobs > 1: (plt.legend())
+if num_jobs > 1: (plt.legend(loc='upper left', fontsize=12, frameon=False))
 
 # Save the plot to the designated output path.
 

@@ -26,7 +26,7 @@ PLOT_DIR="${FIO_PATH}/plot"
 # --- All plots ---
 # read - seq
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_read_seq_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_read_seq_ssocks.pdf" \
     --title "Throughput vs. Block Size (Sequential Read)" \
     --rw "read" \
     --jobs "${DATA_DIR}/throughput_vs_bs_read_seq_eth.json" \
@@ -38,7 +38,7 @@ python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
 
 # read - rand
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_read_rand_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_read_rand_ssocks.pdf" \
     --title "Throughput vs. Block Size (Random Read)" \
     --rw "read" \
     --jobs "${DATA_DIR}/throughput_vs_bs_read_rand_eth.json" \
@@ -50,7 +50,7 @@ python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
 
 # read - seq rand
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_read_all_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_read_all_ssocks.pdf" \
     --title "Throughput vs. Block Size (Sequential and Random Read)" \
     --rw "read" \
     --jobs "${DATA_DIR}/throughput_vs_bs_read_seq_eth.json" \
@@ -66,7 +66,7 @@ python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
 
 # write - seq
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_write_seq_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_write_seq_ssocks.pdf" \
     --title "Throughput vs. Block Size (Sequential Write)" \
     --rw "write" \
     --jobs "${DATA_DIR}/throughput_vs_bs_write_seq_eth.json" \
@@ -78,7 +78,7 @@ python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
 
 # write - rand
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_write_rand_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_write_rand_ssocks.pdf" \
     --title "Throughput vs. Block Size (Random Write)" \
     --rw "write" \
     --jobs "${DATA_DIR}/throughput_vs_bs_write_rand_eth.json" \
@@ -90,7 +90,7 @@ python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
 
 # write - seq rand
 python3 ${FIO_PATH}/plot/plot_throughput_vs_bs.py \
-    --out_file "${IMG_DIR}/throughput_vs_bs_write_all_ssocks.png" \
+    --out_file "${IMG_DIR}/throughput_vs_bs_write_all_ssocks.pdf" \
     --title "Throughput vs. Block Size (Sequential and Random Write)" \
     --rw "write" \
     --jobs "${DATA_DIR}/throughput_vs_bs_write_seq_eth.json" \
