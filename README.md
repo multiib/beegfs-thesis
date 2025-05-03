@@ -20,9 +20,10 @@ This repository supports my Master’s thesis, which explores integrating Remote
 * **`scripts/`** – Utilities for building BeeGFS, provisioning testbeds and collecting statistics.
 * **`div/`** – Miscellaneous artefacts (figures, raw logs, presentation slides, etc.).
 
+## Related Resources
 
-
-
+- [Dolphin Interconnect Solutions](https://www.dolphinics.com/) – Provider of PCIe NTB hardware and software used for low-latency interconnects.
+- [ThinkParQ – BeeGFS Official Site](https://www.beegfs.io/) – Official website of the BeeGFS parallel file system developed by ThinkParQ.
 
 ## License
 All code within the beegfs-ssock directory is originally copyright © ThinkParQ GmbH. Modifications have been made by the author. The official BeeGFS codebase is available at: [ThinkParQ/beegfs](https://github.com/ThinkParQ/beegfs)
