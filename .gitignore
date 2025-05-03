@@ -69,10 +69,12 @@ htmlcov/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
-
 # Mounts
 z17/
 z18/
+
+# Misc
+macos-scripts/
 
 
 ###############################################################################
