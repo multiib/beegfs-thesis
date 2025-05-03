@@ -35,7 +35,7 @@ If you use this work in academic research, please cite:
 @mastersthesis{borge2025thesis,
   title        = {RDMA Integration for BeeGFS over PCIe NTB Interconnects},
   author       = {Benjamin Borge},
-  year         = 2022,
+  year         = 2025,
   month        = {May},
   address      = {Oslo, Norway},
   school       = {University of Oslo},
