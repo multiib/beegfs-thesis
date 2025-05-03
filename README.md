@@ -17,8 +17,9 @@ This repository supports my Master’s thesis, which explores integrating Remote
 
 * **`beegfs-ssock/`** – Fork of the BeeGFS source tree with an RDMA‑aware socket layer.
 * **`benchmarks/`** – Scripts, configuration files and sample results for fio, iperf and bespoke micro‑benchmarks.
+* **`div/`** – Miscellaneous files.
 * **`scripts/`** – Utilities for building BeeGFS, provisioning testbeds and collecting statistics.
-* **`div/`** – Miscellaneous artefacts (figures, raw logs, presentation slides, etc.).
+* **`tex/`** – – LaTeX source files.
 
 ## Related Resources
 
