@@ -1,0 +1,36 @@
+\begin{tikzpicture}[scale=0.399,every text node part/.style={align=center}]
+
+    \node at (0, 14) {PIO};
+    \node at (0, 8)  {DMA}; 
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15.5,11) rectangle (-8.5,13);
+    \draw[fill=dis!50, rounded corners=2pt] (15.5,11) rectangle (8.5,13);
+    \draw[fill=ssocks!50, rounded corners=2pt] (-3.5,11) rectangle (3.5,13);
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15.5,5) rectangle (-8.5,7);
+    \draw[fill=dis!50, rounded corners=2pt] (15.5,5) rectangle (8.5,7);
+    \draw[fill=eth!50, rounded corners=2pt] (-3.5,5) rectangle (3.5,6);
+
+    \draw[fill=ssocks!50, rounded corners=2pt] (-3.5,1.5) rectangle (3.5,3.5);
+
+    \node at (-12, 12) {\scriptsize Device};
+    \node at (0, 12) {\scriptsize CPU};
+    \node at (12, 12) {\scriptsize Memory};
+
+    \node at (-12, 6) {\scriptsize Device};
+    \node at (0, 2.5) {\scriptsize CPU};
+    \node at (12, 6) {\scriptsize Memory};
+
+    \node at (0, 5.5) {\scriptsize DMA Controller};
+
+    \draw[<->] (-8.5, 12) -- (-3.5, 12);
+    \draw[<->] (8.5, 12) -- (3.5, 12);
+
+    \draw[<->] (-8.5, 6.5) -- (8.5, 6.5);
+    
+    \draw[<->, dashed] (0, 3.5) -- (0, 5);
+
+    \draw[<->, dashed] (-8.5, 5.5) -- (-3.5, 5.5);
+    \draw[<->, dashed] (8.5, 5.5) -- (3.5, 5.5);
+    
+\end{tikzpicture}

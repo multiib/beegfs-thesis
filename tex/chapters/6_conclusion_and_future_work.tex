@@ -1,0 +1,36 @@
+\chapter{Conclusion and Future Work}
+
+\section{Conclusion}
+
+\section{Future Work}
+
+\subsection{Runtime Retrieval of Address Family}
+
+\texttt{AF\_SSOCKS} is not defined in standard system header files like conventional address families. In the current BeeGFS implementation, the address family index is hardcoded in the source code. 
+
+For user-space applications, it is preferable to retrieve the address family index at runtime by reading from the file \texttt{/proc/net/af\_ssocks/family}. An example of how this could work is shown in Listing \ref{lst:get_ssocks}. This should be performed during the initialization phase to avoid unnecessary file I/O every time a socket is created.
+
+In the kernel module, the address family index could instead be supplied as a module parameter.
+
+\begin{listing}[H]
+\begin{minted}[label={lst:get_ssocks}]{c}
+static short get_ssocks_address_family(void)
+{
+    char af_index[64];
+    int fd = open("/proc/net/af_ssocks/family", O_RDONLY);
+    if (fd == -1) return -1;
+
+    int n = read(fd, af_index, sizeof(af_index));
+    close(fd);
+    return (n > 0) ? (short)atoi(af_index) : -1;
+}
+\end{minted}
+\caption{Reading AF\_SSOCKS from file.}
+\end{listing}
+
+\subsection{Modular SuperSockets Integration}
+
+In the current BeeGFS implementation, the \texttt{connInterfaceFile} allows enabling different network interfaces for TCP/IP and RDMA communication without requiring a rebuild. However, this mechanism does not support switching between TCP/IP and SuperSockets. To change between these protocols, it is necessary to rebuild the source code. A more flexible design would introduce modular support, allowing users to configure the protocol choice without modifying and recompiling the code. Although services would still need to be stopped and restarted after a configuration change, rebuilding would no longer be required. A key challenge is that SuperSockets and TCP/IP share the same IP address, despite using different physical interfaces, and therefore cannot be distinguished based on the IP address alone. Addressing this limitation would require further modifications to the source code. One potential solution is to introduce an option in the configuration file that specifies the desired interface type, allowing the system to dynamically select the appropriate address family based on the configuration.
+
+\subsection{SISCI Implementation}
+Idea: Write about how a SISCI implementation could look like. Even better performance.

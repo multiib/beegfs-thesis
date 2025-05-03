@@ -1,0 +1,54 @@
+\begin{tikzpicture}[scale=0.399]
+
+    \def\totalwidth{31}
+    \def\segmentwidth{\totalwidth/7}
+    \def\startx{-15.5}
+    \def\endx{15.5}
+
+    \draw[fill=ib!50, thick] (\startx,0) rectangle (\endx,2);
+
+    \def\xone{\startx + \segmentwidth}
+    \def\xtwo{\startx + 2*\segmentwidth}
+    \def\xthree{\startx + 3*\segmentwidth}
+    \def\xfour{\startx + 4*\segmentwidth}
+    \def\xfive{\startx + 5*\segmentwidth}
+    \def\xsix{\startx + 6*\segmentwidth}
+
+    \draw[fill=ib!50, draw=none] (\startx,0) rectangle (\xone,2);
+    \node at (\startx + 0.5*\segmentwidth,1) {\scriptsize STP};
+
+    \draw[fill=dis!50, draw=none] (\xone,0) rectangle (\xtwo,2);
+    \node at (\xone + 0.5*\segmentwidth,1) {\scriptsize Seq. Num};
+
+    \draw[fill=eth!50, draw=none] (\xtwo,0) rectangle (\xthree,2);
+    \node at (\xtwo + 0.5*\segmentwidth,1) {\scriptsize Header};
+
+    \draw[fill=eth!50, draw=none] (\xthree,0) rectangle (\xfour,2);
+    \node at (\xthree + 0.5*\segmentwidth,1) {\scriptsize Payload};
+
+    \draw[fill=eth!50, draw=none] (\xfour,0) rectangle (\xfive,2);
+    \node at (\xfour + 0.5*\segmentwidth,1) {\scriptsize ECRC};
+
+    \draw[fill=dis!50, draw=none] (\xfive,0) rectangle (\xsix,2);
+    \node at (\xfive + 0.5*\segmentwidth,1) {\scriptsize LCRC};
+
+    \draw[fill=ib!50, draw=none] (\xsix,0) rectangle (\endx,2);
+    \node at (\xsix + 0.5*\segmentwidth,1) {\scriptsize END};
+
+    \draw (\xone,0) -- (\xone,2);
+    \draw (\xtwo,0) -- (\xtwo,2);
+    \draw[dashed] (\xthree,0) -- (\xthree,2);
+    \draw[dashed] (\xfour,0) -- (\xfour,2);
+    \draw (\xfive,0) -- (\xfive,2);
+    \draw (\xsix,0) -- (\xsix,2);
+
+    \draw[dashed] (\xtwo,0) -- (\xtwo,-1) -- (\xfive,-1) -- (\xfive,0);
+
+    \draw[dashed] (\xone,0) -- (\xone,-2) -- (\xsix,-2) -- (\xsix,0);
+
+    \draw[dashed] (\startx,0) -- (\startx,-3) -- (\endx,-3) -- (\endx,0);
+
+    \node at (0, -0.6) {\tiny TLP};
+    \node at (0, -1.6) {\tiny DLLP};
+    \node at (0, -2.6) {\tiny Physical Frame};
+\end{tikzpicture}

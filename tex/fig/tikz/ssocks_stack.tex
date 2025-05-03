@@ -1,0 +1,91 @@
+\begin{tikzpicture}[scale=0.399]
+    \draw[fill=eth!50, rounded corners=2pt] (-7, 32) rectangle (-1, 28);
+    \node at (-4, 30.75) {\scriptsize Kernel Module};
+    \node at (-4, 29) {\tiny AF\_SSOCKS};
+
+    \draw[fill=eth!50, rounded corners=2pt] (1, 32) rectangle (7, 28);
+    \node at (4, 30.75) {\scriptsize Application};
+    \node at (4, 29) {\tiny AF\_SSOCKS};
+    
+    \draw[fill=eth!50, rounded corners=2pt] (9, 32) rectangle (15, 28);
+    \node at (12, 30.75) {\scriptsize Application};
+    \node at (12, 29) {\tiny AF\_INET};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15, 26) rectangle (-9, 23);
+    \node at (-12, 25) {\scriptsize Kernel Network};
+    \node at (-12, 24) {\scriptsize Stack};
+    \draw[fill=gray!30, rounded corners=2pt] (-7, 26) rectangle (-1, 23);
+    \node at (-4, 25) {\scriptsize Kernel Socket};
+    \node at (-4, 24) {\scriptsize Handling};
+    \draw[fill=gray!30, rounded corners=2pt, dashed] (9, 26) rectangle (15, 23);
+    \node at (12, 24.5) {\scriptsize LD\_PRELOAD};
+    \node at (7.5, 24) {\tiny libk.ko};
+    \node at (10.5, 22.5) {\tiny libu.ko};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-15, 21) rectangle (-9, 18);
+    \node at (-12, 19.5) {\scriptsize IPoPCIe};
+    \draw[fill=dis!50, rounded corners=2pt] (-7, 21) rectangle (-1, 18);
+    \node at (-4, 20) {\scriptsize Kernel Space};
+    \node at (-4, 19) {\scriptsize SuperSocket};
+    \draw[fill=dis!50, rounded corners=2pt] (9, 21) rectangle (15, 18);
+    \node at (12, 20) {\scriptsize User Space};
+    \node at (12, 19) {\scriptsize SuperSocket};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15, 16) rectangle (-1, 12);
+    \node at (-8, 13.35) {\scriptsize Kernel Space SCILIB, Mailbox etc};
+    
+    \draw[fill=gray!30, rounded corners=2pt] (1, 16) rectangle (15, 12);
+    \node at (8, 13.35) {\scriptsize User Space SCILIB, Mailbox etc};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-7, 10) rectangle (-1, 7);
+    \node at (-4, 9) {\scriptsize SISCI};
+    \node at (-4, 8) {\scriptsize Kernel Helper};
+    \draw[fill=dis!50, rounded corners=2pt] (1, 10) rectangle (15, 7);
+    \node at (8, 8.5) {\scriptsize SISCI};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15, 5) rectangle (-1, 1);
+    \node at (-8, 2.35) {\scriptsize IRM (Internal Resource Manager)};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15, -1) rectangle (-1, -5);
+    \node at (-11.5, -2.25) {\scriptsize GX};
+    \node at (-11.5, -3.75) {\tiny (Generic Hardware)};
+    \node at (-4.5, -2.25) {\scriptsize IX, MX PX};
+    \node at (-4.5, -3.75) {\tiny (Device Specific)};
+    \draw[fill=ib!50, rounded corners=2pt] (1, -1) rectangle (15, -5);
+    \node at (8, -3) {\scriptsize Dolphin Device (NTB)};
+
+    \draw[dashed] (0,32) -- (0,-7);
+    \draw[dashed] (0,0) -- (15,0);
+
+    \node at (8, 1.25) {User Space};
+    \node at (8, -7) {Hardware};
+    \node at (-8, -7) {Kernel Space};
+
+    \draw[fill=gray!30, densely dashed] (-13.5, 16) rectangle (13.5, 14.5);
+    \node at (0, 15.25) {\scriptsize SCILIB Common};
+
+    \draw[fill=gray!30, densely dashed] (-13.5, 5) rectangle (-2.5, 3.5);
+    \node at (-8, 4.25) {\scriptsize GENIF};
+
+    \draw[dashed] (-8, -1) -- (-8, -5);
+
+    \draw[<->] (-4, 28) -- (-4, 26);
+    \draw[<->] (4, 28) -- (4, 24.5) -- (-1, 24.5);
+    \draw[-] (4, 24.5) -- (9, 24.5);
+    \draw[<-] (12, 28) -- (12, 26);
+    \draw[<->] (-9, 24.5) -- (-7, 24.5);
+    \draw[<->] (-12, 23) -- (-12, 21);
+    \draw[<->] (-4, 23) -- (-4, 21);
+    \draw[->] (12, 23) -- (12, 21);
+
+    \draw[<->] (-12, 18) -- (-12, 16);
+    \draw[<->] (-4, 18) -- (-4, 16);
+    \draw[<->] (12, 18) -- (12, 16);
+
+    \draw[<->] (-12, 12) -- (-12, 5);
+    \draw[<->] (8, 12) -- (8, 10);
+    \draw[<->] (-1, 8.5) -- (1, 8.5);
+    \draw[<->] (-4, 7) -- (-4, 5);
+    \draw[<->] (-8, 1) -- (-8, -1);
+    \draw[<->] (-1, -3) -- (1, -3);
+\end{tikzpicture}

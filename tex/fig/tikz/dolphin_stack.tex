@@ -1,0 +1,75 @@
+\begin{tikzpicture}[scale=0.399,every text node part/.style={align=center}]
+
+    \draw[fill=gray!30, rounded corners=2pt] (-15.5,15) rectangle (15.5,17);
+    \node at (0, 16) {\scriptsize Application};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-15.5,12) rectangle (-11.5,14);
+    \node at (-13.5, 13) {\scriptsize MPI};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-11,12) rectangle (-7,14);
+    \node at (-9, 13.35) {\tiny User Space};
+    \node at (-9, 12.65) {\tiny SuperSocket};
+
+    \draw[fill=gray!30, rounded corners=2pt] (-2,12) rectangle (2,14);
+    \node at (0, 13.4) {\scriptsize Device};
+    \node at (0, 12.6) {\scriptsize Driver};
+
+    \draw[fill=gray!30, rounded corners=2pt] (2.5,12) rectangle (15.5,14);
+    \node at (9, 13) {\scriptsize Socket Switch};
+
+    \draw[fill=gray!30, rounded corners=2pt] (7,9) rectangle (15.5,11);
+    \node at (11.25, 10) {\scriptsize TCP/IP Stack};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-15.5,6) rectangle (-2.5,8);
+    \node at (-9, 7) {\scriptsize SISCI API};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-2,6) rectangle (2,8);
+    \node at (0, 7) {\scriptsize Smart IO};
+
+    \draw[fill=dis!50, rounded corners=2pt] (2.5,6) rectangle (6.5,8);
+    \node at (4.5, 7.35) {\tiny Kernel Space};
+    \node at (4.5, 6.65) {\tiny SuperSocket};
+
+    \draw[fill=dis!50, rounded corners=2pt] (7,6) rectangle (11,8);
+    \node at (9, 7) {\scriptsize IP-Driver};
+
+    \draw[fill=gray!30, rounded corners=2pt] (11.5,6) rectangle (15.5,8);
+    \node at (13.5, 7) {\scriptsize IP-Driver};
+
+    \draw[fill=dis!50, rounded corners=2pt] (-15.5,3) rectangle (11,5);
+    \node at (-2.25, 4) {\scriptsize IRM - Interconnect Resource Manager};
+
+    \draw[fill=ib!50, rounded corners=2pt] (-15.5,0) rectangle (11,2);
+    \node at (-2.25, 1) {\scriptsize PCIe Hardware};
+
+    \draw[fill=eth!50, rounded corners=2pt] (11.5,0) rectangle (15.5,2);
+    \node at (13.5, 1.4) {\scriptsize Ethernet};
+    \node at (13.5, 0.6) {\scriptsize Hardware};
+
+    \draw (-13.5, 15) -- (-13.5, 14);
+    \draw (-9, 15) -- (-9, 14);
+    \draw (-4.5, 15) -- (-4.5, 8);
+    \draw (0, 15) -- (0, 14);
+    \draw (4.5, 15) -- (4.5, 14);
+    \draw (9, 15) -- (9, 14);
+    \draw (13.5, 15) -- (13.5, 14);
+
+    \draw (-13.5, 12) -- (-13.5, 8);
+    \draw (-9, 12) -- (-9, 8);
+
+    \draw (0, 12) -- (0, 8);
+    \draw (4.5, 12) -- (4.5, 8);
+    \draw (9, 12) -- (9, 11);
+    \draw (13.5, 12) -- (13.5, 11);
+
+    \draw (9, 9) -- (9, 8);
+    \draw (13.5, 9) -- (13.5, 8);
+
+    \draw (-9, 6) -- (-9, 5);
+    \draw (0, 6) -- (0, 5);
+    \draw (4.5, 6) -- (4.5, 5);
+    \draw (9, 6) -- (9, 5);
+    \draw (13.5, 6) -- (13.5, 2);
+
+    \draw (-2.25, 3) -- (-2.25, 2);
+\end{tikzpicture}

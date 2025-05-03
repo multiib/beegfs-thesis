@@ -1,0 +1,126 @@
+\documentclass[a4paper, USenglish, 11pt]{report}
+
+% Packages
+\usepackage{packages/uiomasterfp/uiomasterfp}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{minted}
+\usepackage{palatino}
+\usepackage{microtype}
+\usepackage{setspace} 
+\usepackage{listings}
+\usepackage{tocloft}
+\usepackage[USenglish]{babel} 
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=false, 
+    hidelinks
+}
+
+% Tikz setup
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shapes.multipart}
+
+% Minted setup
+\usemintedstyle{default}
+\setminted[c]{
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  bgcolor=gray!10,
+  fontsize=\footnotesize,
+  linenos,
+  firstnumber=1,
+  breaklines,
+  autogobble
+}
+
+% Custom colors
+\definecolor{eth}{HTML}{FAB900}     % BeeGFS
+\definecolor{eth2}{HTML}{FFC92E}    % BeeGFS light
+\definecolor{dis}{HTML}{389E9B}     % Dolphin
+\definecolor{dis2}{HTML}{4ABFBB}    % Dolphin light
+\definecolor{ssocks}{HTML}{DD0001}  % UiO
+\definecolor{ssocks2}{HTML}{FF1112} % UiO light
+\definecolor{sisci}{HTML}{CF24AA}   % Pink
+\definecolor{sisci2}{HTML}{DF47BE}  % Pink light
+\definecolor{ib}{HTML}{76B900}      % Nvidia
+\definecolor{ib2}{HTML}{97EC00}     % Nvidia light
+
+% Misc Setiings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter}{1em}{}
+\setstretch{1.5} 
+\bibliographystyle{acm}
+
+% Front page 
+\author{Benjamin Borge}
+\title{RDMA Integration for BeeGFS over PCIe NTB Interconnects}
+\subtitle{Leveraging Dolphin Interconnect Solutions for Parallel Filesystems}
+
+\begin{document}
+
+% Second page
+\uiomasterfp[program={Informatics: Programming and System Architecture},color=pink, supervisors={Håkon Kvale Stensland\and Tore Heide Larsen \and Jonas Markussen}]
+
+% Abstract
+\begin{abstract}
+The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. The abstract should be the last thing to be written. 
+\end{abstract}
+
+% Roman page numbering
+\pagenumbering{roman}
+\setcounter{page}{3}
+
+% Acknowledgments
+\section*{Acknowledgments}
+\newpage
+
+% TOC
+\tableofcontents
+
+% Lists
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\listoflistings
+\newpage
+
+% Arab page numbering
+\pagenumbering{arabic}
+
+% Chapters
+\input{chapters/1_introduction}
+\input{chapters/2_background}
+\input{chapters/3_system_design_and_implementation}
+\input{chapters/4_results}
+\input{chapters/5_discussion}
+\input{chapters/6_conclusion_and_future_work}
+
+% References section
+\setstretch{1} 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\:\:\:\:\, Bibliography}
+\bibliography{references}
+
+% Appendicies
+\setstretch{1.25}
+\appendix
+\input{appendices/A}
+\input{appendices/B}
+
+\end{document}

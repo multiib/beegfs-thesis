@@ -1,0 +1,46 @@
+\begin{tikzpicture}[scale=0.399]
+    \draw[fill=gray!30, rounded corners=2pt] (-13.25,7) rectangle (-2.25,9);
+    \node at (-7.75, 8) {\scriptsize PCIe Device A};
+    \draw[fill=eth!50, rounded corners=2pt] (-13.25,4) rectangle (-2.25,6);
+    \node at (-7.75, 5) {\scriptsize Transaction Layer};
+    \draw[fill=dis!50, rounded corners=2pt] (-13.25,1) rectangle (-2.25,3);
+    \node at (-7.75, 2) {\scriptsize Data Link Layer};
+    \draw[fill=ib!50, rounded corners=2pt] (-13.25,-2) rectangle (-2.25,0);
+    \node at (-7.75, -1) {\scriptsize Physical Layer};
+
+
+    \draw[fill=gray!30, rounded corners=2pt] (13.25,7) rectangle (2.25,9);
+    \node at (7.75, 8) {\scriptsize PCIe Device B};
+    \draw[fill=eth!50, rounded corners=2pt] (13.25,4) rectangle (2.25,6);
+    \node at (7.75, 5) {\scriptsize Transaction Layer};
+    \draw[fill=dis!50, rounded corners=2pt] (13.25,1) rectangle (2.25,3);
+    \node at (7.75, 2) {\scriptsize Data Link Layer};
+    \draw[fill=ib!50, rounded corners=2pt] (13.25,-2) rectangle (2.25,0);
+    \node at (7.75, -1) {\scriptsize Physical Layer};
+
+    \draw[<-] (-4.75,7) -- (-4.75,6);
+    \draw[->] (-10.75,7) -- (-10.75,6);
+    \node at (-4, 6.5) {\scriptsize RX};
+    \node at (-11.5, 6.5) {\scriptsize TX};
+
+    \draw[<-] (-4.75,4) -- (-4.75,3);
+    \draw[->] (-10.75,4) -- (-10.75,3);
+
+    \draw[<-] (-4.75,1) -- (-4.75,0);
+    \draw[->] (-10.75,1) -- (-10.75,0);
+
+    \draw[->] (4.75,7) -- (4.75,6);
+    \draw[<-] (10.75,7) -- (10.75,6);
+    \node at (4, 6.5) {\scriptsize TX};
+    \node at (11.5, 6.5) {\scriptsize RX};
+
+    \draw[->] (4.75,4) -- (4.75,3);
+    \draw[<-] (10.75,4) -- (10.75,3);
+
+    \draw[->] (4.75,1) -- (4.75,0);
+    \draw[<-] (10.75,1) -- (10.75,0);
+
+    \draw[<-, dashed] (-4.75,-2) -- (-4.75,-2.75) -- (4.75,-2.75) -- (4.75,-2);
+    \draw[<-, dashed] (10.75,-2) -- (10.75,-3.5) -- (-10.75,-3.5) -- (-10.75,-2);
+
+\end{tikzpicture}
