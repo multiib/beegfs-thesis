@@ -1,0 +1,1 @@
+savedcmd_/home/benjabor/beegfs-ssock/client_module/build/../source/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/benjabor/beegfs-ssock/client_module/build/../source/Module.symvers -T /home/benjabor/beegfs-ssock/client_module/build/../source/modules.order -i Module.symvers -e 
