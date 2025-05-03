@@ -19,7 +19,7 @@ This repository supports my Master’s thesis, which explores integrating Remote
 * **`benchmarks/`** – Scripts, configuration files and sample results for fio, iperf and bespoke micro‑benchmarks.
 * **`div/`** – Miscellaneous files.
 * **`scripts/`** – Utilities for building BeeGFS, provisioning testbeds and collecting statistics.
-* **`tex/`** – – LaTeX source files.
+* **`tex/`** – LaTeX source files.
 
 ## Related Resources
 
