@@ -6,14 +6,13 @@
 #  Functions:
 #    cp-binaries <none>
 ###############################################################################
-set -euo pipefail
 
 # --- Configuration ---
 _TARGET_DIR="$HOME/bin/beegfs-bin-ssocks"
 _HOSTS=(172.16.3.117 172.16.3.118)
 
 # --- Copy binaries to target directory and sync to remote hosts ---
-cp-binaries() {
+cpy-binaries() {
 
     mkdir -p "$_TARGET_DIR"
 
@@ -48,5 +47,3 @@ cp-binaries() {
         rsync -az --delete --mkpath "$_TARGET_DIR/" "$USER@$host:$_TARGET_DIR/"
     done
 }
-
-cp-binaries()
