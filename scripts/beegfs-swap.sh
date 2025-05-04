@@ -12,7 +12,7 @@
 
 
 # --- Configuration ---
-MGMT_NODE = "mpg-2014-17"
+MGMT_NODE="mpg-2014-17"
 
 # --- Paths ---
 _BEEGFS_MODULE_DIR="/lib/modules/$(uname -r)/updates/fs/beegfs_autobuild"
