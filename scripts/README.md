@@ -1,4 +1,4 @@
-# Scripts Directory
+# Scripts
 
 This folder contains helper scripts used during build, test, and benchmarking workflows.
 
