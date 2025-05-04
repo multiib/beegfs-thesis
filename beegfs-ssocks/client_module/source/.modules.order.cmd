@@ -1,1 +1,1 @@
-savedcmd_/home/benjabor/beegfs-ssock/client_module/build/../source/modules.order := {   echo /home/benjabor/beegfs-ssock/client_module/build/../source/beegfs.o; :; } > /home/benjabor/beegfs-ssock/client_module/build/../source/modules.order
+savedcmd_/home/benjabor/beegfs-thesis/beegfs-ssocks/client_module/build/../source/modules.order := {   echo /home/benjabor/beegfs-thesis/beegfs-ssocks/client_module/build/../source/beegfs.o; :; } > /home/benjabor/beegfs-thesis/beegfs-ssocks/client_module/build/../source/modules.order
