@@ -27,7 +27,7 @@ This repository supports my Master’s thesis, which explores integrating Remote
 - [ThinkParQ – BeeGFS Official Site](https://www.beegfs.io/) – Official website of the BeeGFS parallel file system developed by ThinkParQ.
 
 ## License
-All code within the beegfs-ssock directory is originally copyright © ThinkParQ GmbH. Modifications have been made by the author. The official BeeGFS codebase is available at: [ThinkParQ/beegfs](https://github.com/ThinkParQ/beegfs)
+All code within the beegfs-ssock directory is originally Copyright © ThinkParQ GmbH. Modifications have been made by the author. The official BeeGFS codebase is available at: [ThinkParQ/beegfs](https://github.com/ThinkParQ/beegfs)
 
 ## Citation
 
