@@ -1,38 +1,52 @@
-#!/bin/bash
-
-cp-binaries() {
+###############################################################################
+#  Copy binaries to the right directories on the specified hosts. Strip 
+#  unneeded symbols from the binaries to save space. Skip transferring to the
+#  local host if the IP address matches one of the specified hosts.
+#
+#  Functions:
+#    cp-binaries <none>
+###############################################################################
+set -euo pipefail
 
 # --- Configuration ---
-    TARGET_DIR="/home/benjabor/beegfs-ssock-binaries/"
-    REMOTE_HOST="172.16.3.117"
+_TARGET_DIR="$HOME/bin/beegfs-bin-ssocks"
+_HOSTS=(172.16.3.117 172.16.3.118)
 
+# --- Copy binaries to target directory and sync to remote hosts ---
+cp-binaries() {
 
-    cp /home/benjabor/beegfs-ssock/client_module/build/beegfs.ko $TARGET_DIR/beegfs.ko
+    mkdir -p "$_TARGET_DIR"
 
-    cp /home/benjabor/beegfs-ssock/ctl/build/beegfs-ctl $TARGET_DIR/beegfs-ctl
-    strip --strip-unneeded $TARGET_DIR/beegfs-ctl
+    base_src="$HOME/thesis/beegfs-ssock"
+    declare -A bins=(
+      [client_module/build/beegfs.ko]=beegfs.ko
+      [ctl/build/beegfs-ctl]=beegfs-ctl
+      [event_listener/build/beegfs-event-listener]=beegfs-event-listener
+      [fsck/build/beegfs-fsck]=beegfs-fsck
+      [helperd/build/beegfs-helperd]=beegfs-helperd
+      [meta/build/beegfs-meta]=beegfs-meta
+      [mgmtd/build/beegfs-mgmtd]=beegfs-mgmtd
+      [mon/build/beegfs-mon]=beegfs-mon
+      [storage/build/beegfs-storage]=beegfs-storage
+    )
 
-    cp /home/benjabor/beegfs-ssock/event_listener/build/beegfs-event-listener $TARGET_DIR/beegfs-event-listener
-    strip --strip-unneeded $TARGET_DIR/beegfs-event-listener
+    for rel in "${!bins[@]}"; do
+        dst="$_TARGET_DIR/${bins[$rel]}"
+        cp   "$base_src/$rel" "$dst"
+        [[ "$dst" == *.ko ]] || strip --strip-unneeded "$dst"
+    done
 
-    cp /home/benjabor/beegfs-ssock/fsck/build/beegfs-fsck $TARGET_DIR/beegfs-fsck
-    strip --strip-unneeded $TARGET_DIR/beegfs-fsck
+    # ── Sync to remotes (rsync makes dirs for us) ─────────────────────────────
+    read -r -a LOCAL_IPS <<<"$(hostname -I)"
+    for host in "${_HOSTS[@]}"; do
+        printf '%s\n' "${LOCAL_IPS[@]}" | grep -qx "$host" && {
+            echo "Skipping local host $host"
+            continue
+        }
 
-    cp /home/benjabor/beegfs-ssock/helperd/build/beegfs-helperd $TARGET_DIR/beegfs-helperd
-    strip --strip-unneeded $TARGET_DIR/beegfs-helperd
-
-    cp /home/benjabor/beegfs-ssock/meta/build/beegfs-meta $TARGET_DIR/beegfs-meta
-    strip --strip-unneeded $TARGET_DIR/beegfs-meta
-
-    cp /home/benjabor/beegfs-ssock/mgmtd/build/beegfs-mgmtd $TARGET_DIR/beegfs-mgmtd
-    strip --strip-unneeded $TARGET_DIR/beegfs-mgmtd
-
-    cp /home/benjabor/beegfs-ssock/mon/build/beegfs-mon $TARGET_DIR/beegfs-mon
-    strip --strip-unneeded $TARGET_DIR/beegfs-mon
-
-    cp /home/benjabor/beegfs-ssock/storage/build/beegfs-storage $TARGET_DIR/beegfs-storage
-    strip --strip-unneeded $TARGET_DIR/beegfs-storage
-
-    rsync -avz --progress $TARGET_DIR benjabor@$REMOTE_HOST:$TARGET_DIR
-
+        echo "Syncing to $host …"
+        rsync -az --delete --mkpath "$_TARGET_DIR/" "$USER@$host:$_TARGET_DIR/"
+    done
 }
+
+cp-binaries()

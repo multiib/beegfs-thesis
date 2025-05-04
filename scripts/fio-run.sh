@@ -1,7 +1,12 @@
 #!/bin/bash
+###############################################################################
+#  Run Fio jobs on the specified interface. Save output in JSON format.
+#  Functions:
+#    fio-run <job> <interface>
+###############################################################################
 
 # --- Configuration ---
-FIO_PATH="/home/benjabor/fio"
+FIO_PATH="$HOME/thesis/benchmarks/fio"
 JOB_DIR="$FIO_PATH/job"
 OUTPUT_DIR="$FIO_PATH/out"
 
@@ -17,13 +22,10 @@ SUFFIX="$2"
 JOB_SUBDIR="$JOB_DIR/$SUBDIR"
 OUTPUT_SUBDIR="$OUTPUT_DIR/$SUBDIR"
 
-
-
-# Create the output directory if it doesn't exist
+# --- Check if the job subdirectory exists ---
 mkdir -p "$OUTPUT_SUBDIR"
 
-# --- Find and Run Fio Job Files Recursively ---
-# For each .fio file found under JOB_SUBDIR (including in subdirectories)
+# --- Run Fio jobs ---
 find "$JOB_SUBDIR" -type f -name "*.fio" | while read -r jobfile; do
   jobname=$(basename "$jobfile" .fio)
   output_file="${SUBDIR}_${jobname}_${SUFFIX}.json"
