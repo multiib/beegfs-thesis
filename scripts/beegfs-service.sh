@@ -1,70 +1,62 @@
-# beegfs-service.sh
-# Source this file to have the beegfs-service function available.
-#
-# Usage:
-#   beegfs-service start all
-#   beegfs-service start mgmtd
-#   beegfs-service stop client
-#   beegfs-service stop all
+###############################################################################
+#  BeeGFS helpers – start/stop individual or all services
+###############################################################################
 
-beegfs-service() {
-    # List of all BeeGFS services
-    local BEEGFS_SERVICES=( "beegfs-mgmtd" "beegfs-meta" "beegfs-storage" "beegfs-helperd" "beegfs-client" )
-    local action="$1"
-    local target="$2"
-    local svc
-    local valid
+_BEEGFS_UNITS=(beegfs-mgmtd beegfs-meta beegfs-storage beegfs-helperd beegfs-client)
 
-    # Usage message
-    if [[ $# -ne 2 ]]; then
-        echo "Usage: beegfs-service {start|stop} {all|service_name}"
-        echo "Example: beegfs-service start all"
-        echo "         beegfs-service stop client"
+# Helper that starts/stops/restarts/reloads/checks status of BeeGFS services
+_beegfs_ctl() {
+    local action="$1" target="$2" svc valid=0
+
+    if [[ -z "$target" ]]; then
+        echo "Usage: beegfs-${action} {all|service_name}"
         return 1
     fi
-
-    # Validate action parameter
-    if [[ "$action" != "start" && "$action" != "stop" ]]; then
-        echo "Invalid action: $action"
-        echo "Usage: beegfs-service {start|stop} {all|service_name}"
-        return 1
-    fi
-
-    # Function to perform service action
-    perform_action() {
-        local svc="$1"
-        echo "${action^}ing ${svc} ..."  # Capitalize first letter of action for display
-        sudo systemctl "$action" "$svc"
-    }
 
     if [[ "$target" == "all" ]]; then
-        # Loop through all defined services
-        for svc in "${BEEGFS_SERVICES[@]}"; do
-            perform_action "$svc"
+        for svc in "${_BEEGFS_UNITS[@]}"; do
+            _beegfs_do "$action" "$svc"
         done
-    else
-        # If target doesn't already start with 'beegfs-', prepend it
-        if [[ "$target" != beegfs-* ]]; then
-            target="beegfs-$target"
-        fi
-
-        # Validate that the target is in our list of services
-        valid=0
-        for svc in "${BEEGFS_SERVICES[@]}"; do
-            if [[ "$svc" == "$target" ]]; then
-                valid=1
-                break
-            fi
-        done
-
-        if [[ $valid -ne 1 ]]; then
-            echo "Invalid service name: $target"
-            echo "Valid services: ${BEEGFS_SERVICES[*]//beegfs-/}"
-            return 1
-        fi
-
-        perform_action "$target"
+        return
     fi
+
+    [[ "$target" != beegfs-* ]] && target="beegfs-${target}"
+
+    for svc in "${_BEEGFS_UNITS[@]}"; do
+        [[ "$svc" == "$target" ]] && { valid=1; break; }
+    done
+    if (( ! valid )); then
+        echo "Invalid service name: $target"
+        echo "Valid services: ${_BEEGFS_UNITS[*]//beegfs-/}"
+        return 1
+    fi
+
+    _beegfs_do "$action" "$target"
 }
 
+# Helper that runs systemctl
+_beegfs_do() {
+    local action="$1" unit="$2"
+    local verb
+    case "$action" in
+        start)   verb="Starting" ;;
+        stop)    verb="Stopping" ;;
+        restart) verb="Restarting" ;;
+        reload)  verb="Reloading" ;;
+        status)  verb="Checking" ;;
+        enable)  verb="Enabling" ;;
+        disable) verb="Disabling" ;;
+        *)       echo "Invalid action: $action" ; return 1 ;;
+    esac
+    echo "${verb} ${unit} …"
+    sudo systemctl "$action" "$unit"
+}
 
+# Functions to be called from the command line
+beegfs-start()   { _beegfs_ctl start   "$1"; }
+beegfs-stop()    { _beegfs_ctl stop    "$1"; }
+beegfs-restart() { _beegfs_ctl restart "$1"; }
+beegfs-reload()  { _beegfs_ctl reload  "$1"; }
+beegfs-status()  { _beegfs_ctl status  "$1"; }
+beegfs-enable()  { _beegfs_ctl enable  "$1"; }
+beegfs-disable() { _beegfs_ctl disable "$1"; }
