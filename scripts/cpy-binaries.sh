@@ -8,7 +8,7 @@
 ###############################################################################
 
 # --- Configuration ---
-_TARGET_DIR="$HOME/bin/beegfs-bin-ssocks"
+_TARGET_DIR="$HOME/beegfs-thesis/bin/beegfs-bin-ssocks"
 _HOSTS=(172.16.3.117 172.16.3.118)
 
 # --- Copy binaries to target directory and sync to remote hosts ---
@@ -33,6 +33,7 @@ cpy-binaries() {
         dst="$_TARGET_DIR/${bins[$rel]}"
         cp   "$base_src/$rel" "$dst"
         [[ "$dst" == *.ko ]] || strip --strip-unneeded "$dst"
+        echo "Stripped and copied $rel to $dst"
     done
 
     # ── Sync to remotes (rsync makes dirs for us) ─────────────────────────────
