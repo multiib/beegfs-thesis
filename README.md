@@ -45,6 +45,4 @@ If you use this work in academic research, please cite:
 }
 ```
 
----
-
 
