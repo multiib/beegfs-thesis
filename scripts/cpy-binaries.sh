@@ -9,7 +9,7 @@
 
 # --- Configuration ---
 _TARGET_DIR="$HOME/beegfs-thesis/bin/beegfs-bin-ssocks"
-_HOSTS=(172.16.3.117 172.16.3.118)
+
 
 # --- Copy binaries to target directory and sync to remote hosts ---
 cpy-binaries() {
@@ -38,7 +38,7 @@ cpy-binaries() {
 
     # ── Sync to remotes (rsync makes dirs for us) ─────────────────────────────
     read -r -a LOCAL_IPS <<<"$(hostname -I)"
-    for host in "${_HOSTS[@]}"; do
+    for host in "${TARGET_NODES[@]}"; do
         printf '%s\n' "${LOCAL_IPS[@]}" | grep -qx "$host" && {
             echo "Skipping local host $host"
             continue

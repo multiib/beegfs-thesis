@@ -5,7 +5,7 @@ This folder contains helper scripts used during build, test, and benchmarking wo
 To automatically source all `.sh` files in this directory, add the following to your `~/.bashrc`:
 
 ```bash
-for script in ~/scripts/*.sh; do
+for script in ~/beegfs-thesis/scripts/*.sh; do
   [ -r "$script" ] && source "$script"
 done
 ````

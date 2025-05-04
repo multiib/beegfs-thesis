@@ -26,7 +26,7 @@ _ALL_COMPONENTS=("${_MAIN_COMPONENTS[@]}" mon ctl fsck event-listener)
 
 # --- Check if this is the management node ---
 _is_mgmt_node() {
-    [[ $(hostname -s) == "${MGMT_NODE}" ]] && return 0
+    [[ $(hostname -I) == "${MGMT_NODE}" ]] && return 0
 
     return 1
 }
