@@ -16,8 +16,8 @@ MGMT_NODE = "mpg-2014-17"
 
 # --- Paths ---
 _BEEGFS_MODULE_DIR="/lib/modules/$(uname -r)/updates/fs/beegfs_autobuild"
-_BEEGFS_BIN_DIR="$HOME/thesis/bin/beegfs-bin"
-_BEEGFS_SSOCK_BIN_DIR="$HOME/thesis/bin/beegfs-bin-ssocks"
+_BEEGFS_BIN_DIR="$HOME/beegfs-thesis/bin/beegfs-bin"
+_BEEGFS_SSOCK_BIN_DIR="$HOME/beegfs-thesis/bin/beegfs-bin-ssocks"
 _BEEGFS_TARGET_DIR="/opt/beegfs/sbin"
 
 # --- Components ---

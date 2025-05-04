@@ -17,7 +17,7 @@ cp-binaries() {
 
     mkdir -p "$_TARGET_DIR"
 
-    base_src="$HOME/thesis/beegfs-ssock"
+    base_src="$HOME/beegfs-thesis/beegfs-ssock"
     declare -A bins=(
       [client_module/build/beegfs.ko]=beegfs.ko
       [ctl/build/beegfs-ctl]=beegfs-ctl
