@@ -17,6 +17,7 @@ This repository supports my Master’s thesis, which explores integrating Remote
 
 * **`beegfs-ssocks/`** – Fork of the BeeGFS source tree with SuperSockets support.
 * **`benchmarks/`** – Scripts, configuration files and results.
+* **`bin/`** - BeeGFS binaries.
 * **`div/`** – Miscellaneous files.
 * **`scripts/`** – Workflow scripts.
 * **`tex/`** – LaTeX source files.
