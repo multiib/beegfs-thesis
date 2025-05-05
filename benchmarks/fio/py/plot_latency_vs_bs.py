@@ -5,9 +5,9 @@ import argparse
 import matplotlib.pyplot as plt
 from cycler import cycler
 
-# Dirs
-IMG_DIR = "/Users/benjaminborge/thesis/fio/img"
-DATA_DIR = "/Users/benjaminborge/thesis/fio/data"
+# Directory paths
+IMG_DIR = os.path.expandvars("$HOME/beegfs-thesis/benchmarks/fio/img")
+DATA_DIR = os.path.expandvars("$HOME/beegfs-thesis/benchmarks/fio/data")
 
 # Custom colors
 palette = {

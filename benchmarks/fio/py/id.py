@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from cycler import cycler
 
-# Dirs
-IMG_DIR = "/Users/benjaminborge/thesis/fio/img"
-DATA_DIR = "/Users/benjaminborge/thesis/fio/data"
+# Directory paths
+IMG_DIR = os.path.expandvars("$HOME/beegfs-thesis/benchmarks/fio/img")
+DATA_DIR = os.path.expandvars("$HOME/beegfs-thesis/benchmarks/fio/data")
 
 # Plot title and axis labels
 TITLE = 'Throughput vs. IO Depth (Sequential Write)'
