@@ -16,9 +16,11 @@ This ensures that any shell functions or environment variables defined in these 
 
 ## Repository Structure
 
-* **`beegfs-service/`** – Fill in.
-* **`cpy-binaries/`** – Miscellaneous files.
-* **`fio-run/`** – Workflow scripts.
-* **`swap-binaries/`** – Scripts, configuration files and results.
+* **`beegfs-service/`** – Service helpers for BeeGFS.
+* **`beegfs-swap/`** – Binary updater for services and module.
+* **`conf.sh/`** – Configuration for the other scripts.
+* **`cpy-binaries/`** – Distribution of binaries after build.
+* **`fio-run/`** – Helper for FIO benchmarking.
+
 
 ---
