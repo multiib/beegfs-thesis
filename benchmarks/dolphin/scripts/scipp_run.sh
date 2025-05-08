@@ -1,17 +1,27 @@
 #!/bin/bash
 
-# Configuration
-REMOTE_USER="benjabor"
-REMOTE_HOST="mpg-2014-18"
-REMOTE_BIN="/opt/DIS/bin"
-LOCAL_BIN="/opt/DIS/bin"
+# On remote server, first run:
+# scipp -rn 4 -server
 
-# Step 1: Start scipp server on remote
-echo "[INFO] Starting scipp server on remote..."
-ssh "$REMOTE_USER@$REMOTE_HOST" "cd $REMOTE_BIN && nohup ./scipp -rn 4 -server > server.log 2>&1 &"
-echo "[INFO] Remote server started."
+# Check minimum argument count
+if [ $# -lt 3 ]; then
+  echo "Usage: $0 -rn <number> <filename> [additional scipp parameters]"
+  exit 1
+fi
 
-# Step 2: Start scipp client locally
-echo "[INFO] Starting scipp client locally..."
-cd "$LOCAL_BIN"
-sudo ./scipp -rn 8 -client
+# Parse and validate -rn
+if [ "$1" != "-rn" ]; then
+  echo "Error: First argument must be -rn"
+  echo "Usage: $0 -rn <number> <filename> [additional scipp parameters]"
+  exit 1
+fi
+
+RN="$2"
+FILENAME="$3"
+shift 3
+
+# Construct path to JSON file
+JSON_PATH="$HOME/beegfs-thesis/benchmarks/dolphin/out/scipp/${FILENAME}.json"
+
+# Run scipp with required and optional parameters
+scipp -rn "$RN" -server -parameter -json "$JSON_PATH" "$@"
