@@ -1,0 +1,93 @@
+{
+    "Local nodeId": "4",
+    "Remote nodeId": "8",
+    "Local adapter no": "0",
+    "Inner loops to execute": "100000",
+    "Key Offset": "1729",
+    "Data copy function": "CPU store 4",
+    "SISCI API": "SISCI API version 2.0.2 (  Mar  3 2025 )",
+    "Adapter type": "PXH810-000176",
+    "results": {
+        "loop 0": {
+            "size  0": {
+                "size": "0",
+                "retries": "505",
+                "latency (usec)": "1.125",
+                "latency/2 (usec)": "0.563"
+            },
+            "size  4": {
+                "size": "4",
+                "retries": "482",
+                "latency (usec)": "1.085",
+                "latency/2 (usec)": "0.542"
+            },
+            "size  8": {
+                "size": "8",
+                "retries": "481",
+                "latency (usec)": "1.085",
+                "latency/2 (usec)": "0.543"
+            },
+            "size 16": {
+                "size": "16",
+                "retries": "485",
+                "latency (usec)": "1.096",
+                "latency/2 (usec)": "0.548"
+            },
+            "size 32": {
+                "size": "32",
+                "retries": "482",
+                "latency (usec)": "1.100",
+                "latency/2 (usec)": "0.550"
+            },
+            "size 64": {
+                "size": "64",
+                "retries": "514",
+                "latency (usec)": "1.157",
+                "latency/2 (usec)": "0.579"
+            },
+            "size  128": {
+                "size": "128",
+                "retries": "521",
+                "latency (usec)": "1.179",
+                "latency/2 (usec)": "0.590"
+            },
+            "size  256": {
+                "size": "256",
+                "retries": "543",
+                "latency (usec)": "1.252",
+                "latency/2 (usec)": "0.626"
+            },
+            "size  512": {
+                "size": "512",
+                "retries": "572",
+                "latency (usec)": "1.342",
+                "latency/2 (usec)": "0.671"
+            },
+            "size 1024": {
+                "size": "1024",
+                "retries": "626",
+                "latency (usec)": "1.505",
+                "latency/2 (usec)": "0.753"
+            },
+            "size 2048": {
+                "size": "2048",
+                "retries": "748",
+                "latency (usec)": "1.895",
+                "latency/2 (usec)": "0.948"
+            },
+            "size 4096": {
+                "size": "4096",
+                "retries": "999",
+                "latency (usec)": "2.716",
+                "latency/2 (usec)": "1.358"
+            },
+            "size 8192": {
+                "size": "8192",
+                "retries": "1420",
+                "latency (usec)": "4.274",
+                "latency/2 (usec)": "2.137"
+            }
+        },
+        "loop 1": {}
+    }
+}
