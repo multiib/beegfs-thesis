@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # On remote server, first run:
-# scipp -rn N -server
+# /opt/DIS/bin/scipp -rn N -server
 
 # Check minimum argument count
 if [ $# -lt 2 ]; then
@@ -18,4 +18,4 @@ shift 2
 JSON_PATH="$HOME/beegfs-thesis/benchmarks/dolphin/out/scipp/${FILENAME}.json"
 
 # Run scipp with required and optional parameters
-scipp -rn "$RN" -server -json "$JSON_PATH" "$@"
+/opt/DIS/bin/scipp -rn "$RN" -server -json "$JSON_PATH" "$@"
