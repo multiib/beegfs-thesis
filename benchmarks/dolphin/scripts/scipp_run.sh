@@ -18,4 +18,4 @@ shift 2
 JSON_PATH="$HOME/beegfs-thesis/benchmarks/dolphin/out/scipp/${FILENAME}.json"
 
 # Run scipp with required and optional parameters
-/opt/DIS/bin/scipp -rn "$RN" -server -json "$JSON_PATH" "$@"
+/opt/DIS/bin/scipp -rn "$RN" -client -json "$JSON_PATH" "$@"
