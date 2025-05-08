@@ -22,73 +22,73 @@
         "loop 0": {
             "size  64": {
                 "Message size": "64",
-                "Transfer time": "7.24 us",
-                "Bandwidth": "8.83 MBytes/s"
+                "Transfer time": "3.81 us",
+                "Bandwidth": "16.80 MBytes/s"
             },
             "size 128": {
                 "Message size": "128",
-                "Transfer time": "6.78 us",
-                "Bandwidth": "18.89 MBytes/s"
+                "Transfer time": "7.20 us",
+                "Bandwidth": "17.78 MBytes/s"
             },
             "size 256": {
                 "Message size": "256",
-                "Transfer time": "10.17 us",
-                "Bandwidth": "25.18 MBytes/s"
+                "Transfer time": "8.00 us",
+                "Bandwidth": "32.01 MBytes/s"
             },
             "size 512": {
                 "Message size": "512",
-                "Transfer time": "9.46 us",
-                "Bandwidth": "54.15 MBytes/s"
+                "Transfer time": "7.43 us",
+                "Bandwidth": "68.91 MBytes/s"
             },
             "size  1024": {
                 "Message size": "1024",
-                "Transfer time": "8.59 us",
-                "Bandwidth": "119.19 MBytes/s"
+                "Transfer time": "7.74 us",
+                "Bandwidth": "132.23 MBytes/s"
             },
             "size  2048": {
                 "Message size": "2048",
-                "Transfer time": "7.88 us",
-                "Bandwidth": "259.73 MBytes/s"
+                "Transfer time": "5.68 us",
+                "Bandwidth": "360.37 MBytes/s"
             },
             "size  4096": {
                 "Message size": "4096",
-                "Transfer time": "7.63 us",
-                "Bandwidth": "536.55 MBytes/s"
+                "Transfer time": "6.69 us",
+                "Bandwidth": "611.98 MBytes/s"
             },
             "size  8192": {
                 "Message size": "8192",
-                "Transfer time": "8.05 us",
-                "Bandwidth": "1018.02 MBytes/s"
+                "Transfer time": "5.87 us",
+                "Bandwidth": "1396.52 MBytes/s"
             },
             "size 16384": {
                 "Message size": "16384",
-                "Transfer time": "9.75 us",
-                "Bandwidth": "1680.76 MBytes/s"
+                "Transfer time": "9.85 us",
+                "Bandwidth": "1662.68 MBytes/s"
             },
             "size 32768": {
                 "Message size": "32768",
-                "Transfer time": "12.36 us",
-                "Bandwidth": "2651.99 MBytes/s"
+                "Transfer time": "12.50 us",
+                "Bandwidth": "2622.28 MBytes/s"
             },
             "size 65536": {
                 "Message size": "65536",
-                "Transfer time": "17.60 us",
-                "Bandwidth": "3724.06 MBytes/s"
+                "Transfer time": "16.04 us",
+                "Bandwidth": "4086.55 MBytes/s"
             },
             "size  131072": {
                 "Message size": "131072",
-                "Transfer time": "28.25 us",
-                "Bandwidth": "4638.90 MBytes/s"
+                "Transfer time": "26.27 us",
+                "Bandwidth": "4989.42 MBytes/s"
             },
             "size  262144": {
                 "Message size": "262144",
-                "Transfer time": "48.77 us",
-                "Bandwidth": "5374.78 MBytes/s"
+                "Transfer time": "47.13 us",
+                "Bandwidth": "5561.56 MBytes/s"
             },
             "size  524288": {
                 "Message size": "524288",
-                "Transfer time": "91.56 us",
-                "Bandwidth": "5726.29 MBytes/s"
+                "Transfer time": "93.01 us",
+                "Bandwidth": "5637.08 MBytes/s"
             }
         }
     }
