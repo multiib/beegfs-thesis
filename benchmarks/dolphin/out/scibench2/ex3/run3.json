@@ -1,0 +1,97 @@
+{
+    "Local nodeId": "4",
+    "Remote nodeId": "8",
+    "Local adapter no.": "0",
+    "Segment size": "65536",
+    "Loff": "0",
+    "Loops to execute": "1",
+    "ILoops to execute": "50000",
+    "Key Offset": "0",
+    "Source buffer type": "User malloc",
+    "Destination buffer type": "SISCI Segment",
+    "Memcopy mode": "SISCI SCIMemCpy()",
+    "Direction": "PUSH",
+    "Error Check": "No",
+    "SISCI API": "SISCI API version 2.0.2 (  Apr 22 2025 )",
+    "Adapter type": "MXH930-000926",
+    "Link 0": "Gen4/x16",
+    "results": {
+        "loop 0": {
+            "size 4": {
+                "Segment size": "4",
+                "Average Send Latency": "0.64 us",
+                "Throughput": "6.24 MBytes/s"
+            },
+            "size 8": {
+                "Segment size": "8",
+                "Average Send Latency": "0.64 us",
+                "Throughput": "12.49 MBytes/s"
+            },
+            "size  16": {
+                "Segment size": "16",
+                "Average Send Latency": "0.61 us",
+                "Throughput": "26.10 MBytes/s"
+            },
+            "size  32": {
+                "Segment size": "32",
+                "Average Send Latency": "0.60 us",
+                "Throughput": "53.41 MBytes/s"
+            },
+            "size  64": {
+                "Segment size": "64",
+                "Average Send Latency": "0.60 us",
+                "Throughput": "106.56 MBytes/s"
+            },
+            "size 128": {
+                "Segment size": "128",
+                "Average Send Latency": "0.50 us",
+                "Throughput": "253.47 MBytes/s"
+            },
+            "size 256": {
+                "Segment size": "256",
+                "Average Send Latency": "0.61 us",
+                "Throughput": "416.50 MBytes/s"
+            },
+            "size 512": {
+                "Segment size": "512",
+                "Average Send Latency": "0.94 us",
+                "Throughput": "547.24 MBytes/s"
+            },
+            "size  1024": {
+                "Segment size": "1024",
+                "Average Send Latency": "1.20 us",
+                "Throughput": "853.59 MBytes/s"
+            },
+            "size  2048": {
+                "Segment size": "2048",
+                "Average Send Latency": "1.52 us",
+                "Throughput": "1349.79 MBytes/s"
+            },
+            "size  4096": {
+                "Segment size": "4096",
+                "Average Send Latency": "2.02 us",
+                "Throughput": "2023.40 MBytes/s"
+            },
+            "size  8192": {
+                "Segment size": "8192",
+                "Average Send Latency": "1.09 us",
+                "Throughput": "7483.48 MBytes/s"
+            },
+            "size 16384": {
+                "Segment size": "16384",
+                "Average Send Latency": "1.16 us",
+                "Throughput": "14093.80 MBytes/s"
+            },
+            "size 32768": {
+                "Segment size": "32768",
+                "Average Send Latency": "2.31 us",
+                "Throughput": "14168.27 MBytes/s"
+            },
+            "size 65536": {
+                "Segment size": "65536",
+                "Average Send Latency": "7.34 us",
+                "Throughput": "8928.74 MBytes/s"
+            }
+        }
+    }
+}
