@@ -18,7 +18,7 @@ echo "size,avg_bw_MBps" > $BW_FILE
 # Run latency tests
 for SIZE in "${LAT_SIZES[@]}"; do
     echo "Testing latency, size = $SIZE"
-    LAT_OUT=$(ib_write_lat -s $SIZE -d $DEVICE $SERVER_IP -n 10000 2>/dev/null | grep -v '^#' | tail -1)
+    LAT_OUT=$(ib_write_lat -s $SIZE -d $DEVICE $SERVER_IP -n 10000  | grep -v '^#' | tail -1)
     LAT_AVG=$(echo $LAT_OUT | awk '{print $5}')
     echo "$SIZE,$LAT_AVG" >> $LAT_FILE
 done
