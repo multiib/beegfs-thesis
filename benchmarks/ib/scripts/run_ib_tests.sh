@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SERVER_IP=10.128.3.16      # Provide the server IP as first argument
-DEVICE=mlx5_0
+DEVICE=mlx5_2
 
 # Sizes for latency: 4 to 8192
 LAT_SIZES=(4 8 16 32 64 128 256 512 1024 2048 4096 8192)
