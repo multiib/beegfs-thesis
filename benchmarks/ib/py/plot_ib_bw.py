@@ -114,7 +114,7 @@ def plot_metric(sizes1: np.ndarray, mean1: np.ndarray, sizes2: np.ndarray,
     ax.set_xlabel(r"\textbf{Message size [bytes] ($\log_{2}$)}")
     ax.set_ylabel(ylabel)
 
-    ticks = [2 ** i for i in range(6, 20)]
+    ticks = [2 ** i for i in range(6, 24)]
     ax.set_xticks(ticks)
     ax.set_xticklabels([f"{t:,}" for t in ticks], rotation=45)
 
