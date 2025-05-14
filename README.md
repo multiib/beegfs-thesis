@@ -19,6 +19,8 @@ This repository supports my Master’s thesis, which explores integrating Remote
 * **`benchmarks/`** – Scripts, configuration files and results.
 * **`bin/`** - BeeGFS binaries.
 * **`div/`** – Miscellaneous files.
+* **`img/`** – Plots and figures to visualize benchmark results.
+* **`plot/`** – Python scripts to generate plots and figures.
 * **`scripts/`** – Workflow scripts.
 * **`tex/`** – LaTeX source files.
 
