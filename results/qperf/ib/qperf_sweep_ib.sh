@@ -1,19 +1,12 @@
 #!/bin/bash
 
 # Usage:
-# ./qperf_sweep.sh <IP> <PORT> "<TESTS>" <OUTPUT_FILE> [--cm1]
+# ./qperf_sweep.sh <IP> <PORT> <OUTPUT_FILE>
 
 IP="$1"
 PORT="$2"
 TESTS="$3"
 OUTFILE="$4"
-USE_CM1="$5"
-
-# Optional cm1 flag
-CM1_FLAG=""
-if [[ "$USE_CM1" == "--cm1" ]]; then
-    CM1_FLAG="-cm1"
-fi
 
 # CSV header
 echo "message_size,${TESTS// /,}" > "$OUTFILE"
@@ -23,7 +16,7 @@ for ((exp=6; exp<=24; exp++)); do
     size=$((2**exp))
     echo "Testing message size $size..."
 
-    OUTPUT=$(numactl --cpunodebind=1 qperf $CM1_FLAG -m "$size" "$IP" -lp "$PORT" $TESTS)
+    OUTPUT=$(numactl --cpunodebind=1 qperf -cm1 -m "$size" "$IP" -lp "$PORT" rc_bw rc_lat)
 
     LINE="$size"
     for TEST in $TESTS; do
