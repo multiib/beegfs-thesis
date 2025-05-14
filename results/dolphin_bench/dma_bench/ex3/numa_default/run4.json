@@ -1,0 +1,120 @@
+{
+    "Local nodeId": "4",
+    "Remote nodeId": "8",
+    "Local adapter no.": "0",
+    "Total segment size": "16777216",
+    "Vector length": "1",
+    "Max vector length": "256",
+    "Loops to execute": "1",
+    "ILoops to execute": "1000",
+    "Key Offset": "0",
+    "DMA engine max transfer unit (MTU)": "4294967040",
+    "Max vector element size": "16777216",
+    "Synchronous SCIStartDmaTransfer": "0",
+    "Direction": "PUSH",
+    "DMA mode": "Local",
+    "DMA engine": "Adapter",
+    "SISCI API version": "SISCI API version 2.0.2 (  Apr 22 2025 )",
+    "Adapter type": "MXH930-000926",
+    "Use callback": "no",
+    "Link 0": "Gen4/x16",
+    "results": {
+        "loop 0": {
+            "size  64": {
+                "Message size": "64",
+                "Transfer time": "13.58 us",
+                "Bandwidth": "4.71 MBytes/s"
+            },
+            "size 128": {
+                "Message size": "128",
+                "Transfer time": "13.00 us",
+                "Bandwidth": "9.85 MBytes/s"
+            },
+            "size 256": {
+                "Message size": "256",
+                "Transfer time": "13.06 us",
+                "Bandwidth": "19.60 MBytes/s"
+            },
+            "size 512": {
+                "Message size": "512",
+                "Transfer time": "13.25 us",
+                "Bandwidth": "38.64 MBytes/s"
+            },
+            "size  1024": {
+                "Message size": "1024",
+                "Transfer time": "13.35 us",
+                "Bandwidth": "76.72 MBytes/s"
+            },
+            "size  2048": {
+                "Message size": "2048",
+                "Transfer time": "13.94 us",
+                "Bandwidth": "146.94 MBytes/s"
+            },
+            "size  4096": {
+                "Message size": "4096",
+                "Transfer time": "14.25 us",
+                "Bandwidth": "287.48 MBytes/s"
+            },
+            "size  8192": {
+                "Message size": "8192",
+                "Transfer time": "15.97 us",
+                "Bandwidth": "512.99 MBytes/s"
+            },
+            "size 16384": {
+                "Message size": "16384",
+                "Transfer time": "18.94 us",
+                "Bandwidth": "865.23 MBytes/s"
+            },
+            "size 32768": {
+                "Message size": "32768",
+                "Transfer time": "24.91 us",
+                "Bandwidth": "1315.40 MBytes/s"
+            },
+            "size 65536": {
+                "Message size": "65536",
+                "Transfer time": "37.56 us",
+                "Bandwidth": "1744.88 MBytes/s"
+            },
+            "size  131072": {
+                "Message size": "131072",
+                "Transfer time": "59.87 us",
+                "Bandwidth": "2189.46 MBytes/s"
+            },
+            "size  262144": {
+                "Message size": "262144",
+                "Transfer time": "35.00 us",
+                "Bandwidth": "7490.04 MBytes/s"
+            },
+            "size  524288": {
+                "Message size": "524288",
+                "Transfer time": "54.73 us",
+                "Bandwidth": "9579.71 MBytes/s"
+            },
+            "size 1048576": {
+                "Message size": "1048576",
+                "Transfer time": "91.83 us",
+                "Bandwidth": "11419.29 MBytes/s"
+            },
+            "size 2097152": {
+                "Message size": "2097152",
+                "Transfer time": "149.22 us",
+                "Bandwidth": "14054.28 MBytes/s"
+            },
+            "size 4194304": {
+                "Message size": "4194304",
+                "Transfer time": "318.00 us",
+                "Bandwidth": "13189.72 MBytes/s"
+            },
+            "size 8388608": {
+                "Message size": "8388608",
+                "Transfer time": "626.89 us",
+                "Bandwidth": "13381.24 MBytes/s"
+            },
+            "size 16777216": {
+                "Message size": "16777216",
+                "Transfer time": "1219.66 us",
+                "Bandwidth": "13755.59 MBytes/s"
+            }
+        }
+    }
+}
