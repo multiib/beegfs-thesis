@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import csv
 import numpy as np
 from pathlib import Path
-from typing import Tuple, List
+from typing import List, Tuple
 import json
 import matplotlib.figure
 from pathlib import Path
+from __future__ import annotations
 
 
 # Custom colors for plotting
@@ -142,7 +143,20 @@ def load_csv_column(csv_path: Path, key: str) -> List[float]:
                 continue
     return vals
 
+def load_csv(directory: Path, key: str) -> np.ndarray:
+    """
+    Load a specified column from all CSV files in the directory.
+    Returns a 2D NumPy array of shape (num_files, num_elements_per_file).
+    """
+    directory = Path(directory)
+    data = []
 
+    for file in sorted(directory.glob("*.csv")):
+        if file.is_file():
+            values = load_csv_column(file, key)
+            data.append(values)
+
+    return np.array(data)
 
 def _parse_number(s: str) -> float:
     """Extract the numeric part from a string like '123.45 MBytes/s'."""
@@ -175,6 +189,20 @@ def load_dolphin_column(json_path: Path, key: str) -> np.ndarray:
 
     return np.array(values)
 
+def load_dolphin(directory: Path, key: str) -> np.ndarray:
+    """
+    Load the specified column from all files in the directory using load_dolphin_column.
+    Returns a 2D NumPy array with shape (num_files, num_elements_per_file).
+    """
+    directory = Path(directory)
+    data = []
+
+    for file in sorted(directory.glob("*")):
+        if file.is_file():
+            arr = load_dolphin_column(file, key)
+            data.append(arr)
+
+    return np.array(data)
 
 
 def _parse_block_size(bs: str) -> int:
@@ -222,6 +250,8 @@ def plot_line(
     label: str,
     lw: float = 1.8,
     ms: float = 5,
+    linestyle: str = "-",
+    marker: str = "o",
 ) -> None:
     """
     Plot a styled line with optional line width and marker size.
@@ -235,7 +265,9 @@ def plot_line(
         lw    -- line width (default: 1.8)
         ms    -- marker size (default: 5)
     """
-    ax.plot(x, y, "o-", lw=lw, ms=ms, color=color, label=label)
+    ax.plot(x, y, color=color, label=label, lw=lw, ms=ms,
+            linestyle=linestyle, marker=marker)
+
 
 # Save figure with directory creation
 
@@ -266,3 +298,17 @@ def set_axis_labels(ax, xlabel: str, ylabel: str) -> None:
     """
     ax.set_xlabel(rf"\textbf{{{xlabel}}}")
     ax.set_ylabel(rf"\textbf{{{ylabel}}}")
+
+def stats_2d(array: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Compute column-wise mean, standard deviation, and variance of a 2D NumPy array.
+    
+    Returns:
+        mean:     1D array of column-wise means
+        std_dev:  1D array of column-wise standard deviations
+        variance: 1D array of column-wise variances
+    """
+    mean = np.mean(array, axis=0)
+    std_dev = np.std(array, axis=0)
+    variance = np.var(array, axis=0)
+    return mean, std_dev, variance
