@@ -9,28 +9,35 @@ TESTS="$3"
 OUTFILE="$4"
 USE_CM1="$5"
 
-# Determine whether to include -cm1
+# Optional cm1 flag
 CM1_FLAG=""
 if [[ "$USE_CM1" == "--cm1" ]]; then
     CM1_FLAG="-cm1"
 fi
 
-# Write CSV header
+# CSV header
 echo "message_size,${TESTS// /,}" > "$OUTFILE"
 
-# Sweep from 2^6 to 2^24
+# Sweep 2^6 to 2^24
 for ((exp=6; exp<=24; exp++)); do
     size=$((2**exp))
     echo "Testing message size $size..."
 
-    # Run qperf with optional -cm1
     OUTPUT=$(numactl --cpunodebind=1 qperf $CM1_FLAG -m "$size" "$IP" -lp "$PORT" $TESTS)
 
-    # Parse output
     LINE="$size"
     for TEST in $TESTS; do
-        VALUE=$(echo "$OUTPUT" | awk -v t="$TEST" '
-            $0 ~ t":" {getline; print $3}')
+        RAW=$(echo "$OUTPUT" | awk -v t="$TEST" '
+            $0 ~ t":" {getline; print $3, $4}')
+
+        VALUE=$(echo "$RAW" | awk '{
+            if ($2 == "GB/sec") {
+                printf "%.2f", $1 * 1000
+            } else {
+                printf "%.2f", $1
+            }
+        }')
+
         LINE+=",${VALUE:-N/A}"
     done
 
