@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import matplotlib.ticker as ticker
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -8,8 +10,12 @@ from typing import List, Tuple
 import json
 import matplotlib.figure
 from pathlib import Path
-from __future__ import annotations
 
+
+# Constants
+MIB_TO_GB = 0.001048576  # 1 MiB in decimal gigabytes
+MB_TO_GB = 0.001  # 1 MB in decimal gigabytes
+KB_TO_MB = 0.001  # 1 KB in decimal megabytes
 
 # Custom colors for plotting
 palette = {
@@ -197,7 +203,7 @@ def load_dolphin(directory: Path, key: str) -> np.ndarray:
     directory = Path(directory)
     data = []
 
-    for file in sorted(directory.glob("*")):
+    for file in sorted(directory.glob("*.json")):
         if file.is_file():
             arr = load_dolphin_column(file, key)
             data.append(arr)
@@ -205,38 +211,32 @@ def load_dolphin(directory: Path, key: str) -> np.ndarray:
     return np.array(data)
 
 
-def _parse_block_size(bs: str) -> int:
-    """Convert FIO-style block size (e.g., '4k', '1M') to bytes."""
-    units = {"k": 1024, "m": 1024**2, "g": 1024**3}
-    bs = bs.strip().lower()
-    if bs[-1] in units:
-        return int(float(bs[:-1]) * units[bs[-1]])
-    return int(bs)
 
-def load_fio_column(json_path: Path, rw_type: str = "write", metric_key: str = "iops") -> np.ndarray:
+def load_fio(json_path: Path, rw_type: str, metric_keys: List[str]) -> np.ndarray:
     """
-    Load a single performance metric column from FIO JSON output.
+    Load multiple performance metric columns from FIO JSON output.
 
     Parameters:
-        json_path  -- path to the FIO JSON file
-        rw_type    -- 'read' or 'write'
-        metric_key -- key inside 'read' or 'write' to extract (e.g., 'iops', 'bw')
+        json_path   -- path to the FIO JSON file
+        rw_type     -- 'read' or 'write'
+        metric_keys -- list of keys inside 'read' or 'write' to extract (e.g., ['iops', 'bw'])
 
     Returns:
-        1D NumPy array of values
+        2D NumPy array of shape (num_jobs, num_metrics)
     """
     with json_path.open() as f:
         doc = json.load(f)
 
-    values = []
+    rows = []
     for job in doc["jobs"]:
         try:
-            value = float(job[rw_type][metric_key])
-            values.append(value)
+            row = [float(job[rw_type][key]) for key in metric_keys]
+            rows.append(row)
         except (KeyError, ValueError, TypeError):
             continue
 
-    return np.array(values)
+    return np.array(rows)
+
 
 # Generate numpy array of powers of two
 def powers_of_two(n: int, m: int) -> np.ndarray:
@@ -312,3 +312,25 @@ def stats_2d(array: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     std_dev = np.std(array, axis=0)
     variance = np.var(array, axis=0)
     return mean, std_dev, variance
+
+def plot_std_fill(ax, x, mean, std, color, alpha=0.2, label=None):
+    """
+    Plot shaded area representing standard deviation around the mean.
+
+    Parameters:
+        ax    : matplotlib Axes object
+        x     : x-axis values (e.g., message sizes)
+        mean  : mean values (same length as x)
+        std   : standard deviation values (same length as x)
+        color : color of the shaded region
+        alpha : transparency (default 0.2)
+        label : optional label for the shaded area
+    """
+    ax.fill_between(
+        x,
+        mean - std,
+        mean + std,
+        color=color,
+        alpha=alpha,
+        label=label,
+    )

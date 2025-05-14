@@ -1,0 +1,2 @@
+/opt/DIS/bin/dma_bench -rn 8 -client  -size 16777216 -json /home/benjabor/beegfs-thesis/results/dolphin_bench/dma_bench/ex3/numa_bound/runX.json
+/opt/DIS/bin/dma_bench -rn 4 -server -size 16777216

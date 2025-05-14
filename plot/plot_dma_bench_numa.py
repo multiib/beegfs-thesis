@@ -2,11 +2,12 @@
 
 from utils import *
 
-# Data
-OUT_FILE          = Path.home() / "beegfs-thesis/benchmarks/dolphin/img/dma_bench_numa.pdf"
-NUMA_BOUND_DIR   = Path.home() / "beegfs-thesis/benchmarks/dolphin/out/dma_bench/ex3/numa_bound.json"
-NUMA_DEFAULT_DIR = Path.home() / "beegfs-thesis/benchmarks/dolphin/out/dma_bench/ex3/numa_default.json"
+# File paths
+OUT_FILE         = Path.home() / "beegfs-thesis/img/dma_bench_numa.pdf"
+NUMA_BOUND_DIR   = Path.home() / "beegfs-thesis/results/dma_bench/ex3/numa_bound"
+NUMA_DEFAULT_DIR = Path.home() / "beegfs-thesis/results/dma_bench/ex3/numa_default"
 
+# Configurations
 X_AXIS_LABEL = "Message size [bytes] ($\\log_{2}$)"
 Y_AXIS_LABEL = "Bandwidth [GB/s]"
 
@@ -16,18 +17,25 @@ def main() -> None:
     apply_palatino_style(font_size=14, tick_size=12)
     fig, ax = standard_ax()
 
-    # Load data
+    # Load data (2D array)
     msg_size = powers_of_two(6, 24)
-    numa_bound = load_dolphin_column(NUMA_BOUND_DATA, "Bandwidth")
-    numa_default = load_dolphin_column(NUMA_DEFAULT_DATA, "Bandwidth")
+    numa_bound = load_dolphin(NUMA_BOUND_DIR, "Bandwidth")
+    numa_default = load_dolphin(NUMA_DEFAULT_DIR, "Bandwidth")
 
-    # Divide data by 1000 to convert MB/s to GB/s
-    numa_bound = [x / 1000 for x in numa_bound]
-    numa_default = [x / 1000 for x in numa_default]
+    # MiB to GB conversion
+    numa_bound = [x * MIB_TO_GB for x in numa_bound]
+    numa_default = [x * MIB_TO_GB for x in numa_default]
+
+    numa_bound_mean, numa_bound_std, numa_bound_var = stats_2d(numa_bound)
+    numa_default_mean, numa_default_std, numa_default_var = stats_2d(numa_default)
 
     # Plot data
-    plot_line(ax, msg_size, numa_bound, color=palette["dis"],label=r"Bound to NUMA node 1", marker="o")
-    plot_line(ax, msg_size, numa_default, color=palette["dis2"],label="Default CPU affinity", marker="s")
+    plot_line(ax, msg_size, numa_bound_mean, color=palette["dis"],label="Bound to NUMA node", marker="o")
+    plot_line(ax, msg_size, numa_default_mean, color=palette["dis2"],label="Default CPU affinity", marker="s")
+
+    # Plot std dev shaded area
+    plot_std_fill(ax, msg_size, numa_bound_mean, numa_bound_std, palette["dis"])
+    plot_std_fill(ax, msg_size, numa_default_mean, numa_default_std, palette["dis2"])
 
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)

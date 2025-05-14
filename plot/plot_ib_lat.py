@@ -1,16 +1,6 @@
 #!/usr/bin/env python3
 
-from __future__ import annotations
-
-import sys
-from pathlib import Path
-
-# Set up local imports
-UTILS_PATH = Path.home() / "beegfs-thesis" / "utils"
-sys.path.append(str(UTILS_PATH))
-
-## Local imports
-from plot_utils import *
+from utils import *
 
 # Confgurations
 OUT_FILE     = Path.home() / "beegfs-thesis/benchmarks/ib/img/ib_lat.pdf"
