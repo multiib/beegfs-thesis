@@ -4,9 +4,9 @@ from utils import *
 
 # File paths
 OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_mpg_write_seq_bw.pdf"
-ETH_DATA     = Path.home() / "beegfs-thesis/results/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_eth.json"
-DIS_DATA     = Path.home() / "beegfs-thesis/results/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_dis.json"
-SSOCKS_DATA  = Path.home() / "beegfs-thesis/results/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_ssocks.json"
+ETH_DATA     = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_eth.json"
+DIS_DATA     = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_dis.json"
+SSOCKS_DATA  = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_ssocks.json"
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"

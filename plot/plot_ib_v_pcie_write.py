@@ -4,8 +4,8 @@ from utils import *
 
 # Confgurations
 OUT_FILE     = Path.home() / "beegfs-thesis/img/ib_v_pcie_bw.pdf"
-IB_DATA     = Path.home() / "beegfs-thesis/results/ib/ib_write_bw"
-PCIE_DATA    = Path.home() / "beegfs-thesis/results/dma_bench/ex3/numa_bound"
+IB_DATA     = Path.home() / "beegfs-thesis/bench/ib/ib_write_bw"
+PCIE_DATA    = Path.home() / "beegfs-thesis/bench/dma_bench/ex3/numa_bound"
 
 X_AXIS_LABEL = "Message size [bytes] ($\\log_{2}$)"
 Y_AXIS_LABEL = "Bandwidth [GB/s]"
