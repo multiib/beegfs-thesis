@@ -5,7 +5,7 @@
 
 IP="10.128.3.16"
 PORT="18515"
-TESTS="rc_bw bw_lat"
+TESTS="rc_bw rc_lat"
 OUTDIR="$HOME/beegfs-thesis/benchmarks/qperf/ib"
 OUTFILE="${OUTDIR}/$1"
 
