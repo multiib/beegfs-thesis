@@ -4,13 +4,16 @@ from utils import *
 
 # File paths
 OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_mpg_write_seq_bw.pdf"
-ETH_DATA     = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_eth.json"
-DIS_DATA     = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_dis.json"
-SSOCKS_DATA  = Path.home() / "beegfs-thesis/bench/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_ssocks.json"
+ETH_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_eth.json"
+DIS_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_dis.json"
+SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_ssocks.json"
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
 Y_AXIS_LABEL = "Bandwidth [MB/s]"
+
+EXP_START = 10
+EXP_END = 24
 
 def main() -> None:
 
@@ -19,7 +22,7 @@ def main() -> None:
     fig, ax = standard_ax(ax_h=4)
 
     # Load data
-    msg_size = powers_of_two(10, 24)
+    msg_size = powers_of_two(EXP_START, EXP_END)
     eth_data = load_fio(ETH_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
     dis_data = load_fio(DIS_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
     ssocks_data = load_fio(SSOCKS_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
@@ -46,7 +49,7 @@ def main() -> None:
 
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)
-    set_log_byte_ticks(ax, 10, 24, rotation=45)
+    set_log_byte_ticks(ax, EXP_START, EXP_END, rotation=45)
 
     # Other settings
     ax.grid(True, which="both", linestyle="--", linewidth=0.5, alpha=0.7)

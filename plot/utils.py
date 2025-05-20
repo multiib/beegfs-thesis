@@ -135,9 +135,9 @@ def standard_ax(ax_w: float = 8, ax_h: float = 2.5, margin: float = 2.0):
     return fig, ax
 
 # CSV loading function
-def load_csv_column(csv_path: Path, key: str) -> List[float]:
+def load_csv_column(csv_path: Path, key: str) -> np.ndarray:
     """
-    Load a single column from a CSV file as a list of floats.
+    Load a single column from a CSV file as a 1D NumPy array of floats.
     """
     vals = []
     with csv_path.open(newline="") as fh:
@@ -147,14 +147,13 @@ def load_csv_column(csv_path: Path, key: str) -> List[float]:
                 vals.append(float(row[key]))
             except (KeyError, ValueError):
                 continue
-    return vals
+    return np.array(vals)
 
 def load_csv(directory: Path, key: str) -> np.ndarray:
     """
     Load a specified column from all CSV files in the directory.
     Returns a 2D NumPy array of shape (num_files, num_elements_per_file).
     """
-    directory = Path(directory)
     data = []
 
     for file in sorted(directory.glob("*.csv")):

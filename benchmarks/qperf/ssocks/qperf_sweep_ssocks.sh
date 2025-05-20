@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Server-side cmd:
-# numactl --cpunodebind=1 qperf -cm1 -lp 18515
+# numactl --cpunodebind=1 /opt/DIS/bin/dis_ssocks_run qperf -lp 18515
 
-IP="10.128.3.16"
+IP="10.128.1.16"
 PORT="18515"
-TESTS="rc_bw bw_lat"
-OUTDIR="$HOME/beegfs-thesis/benchmarks/qperf/ib"
+TESTS="tcp_bw tcp_lat"
+OUTDIR="$HOME/beegfs-thesis/benchmarks/qperf/ssocks"
 OUTFILE="${OUTDIR}/$1"
 
 # CSV header
@@ -17,7 +17,7 @@ for ((exp=2; exp<=24; exp++)); do
     size=$((2**exp))
     echo "Testing message size $size..."
 
-    OUTPUT=$(numactl --cpunodebind=1 qperf -cm1 -m "$size" $IP -lp $PORT $TESTS)
+    OUTPUT=$(numactl --cpunodebind=1 /opt/DIS/bin/dis_ssocks_run qperf -m "$size" $IP -lp $PORT $TESTS)
 
     LINE="$size"
     for TEST in $TESTS; do

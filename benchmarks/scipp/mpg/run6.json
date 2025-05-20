@@ -87,7 +87,6 @@
                 "latency (usec)": "4.273",
                 "latency/2 (usec)": "2.137"
             }
-        },
-        "loop 1": {}
+        }
     }
 }

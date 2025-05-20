@@ -2,13 +2,17 @@
 
 from utils import *
 
-# Confgurations
-OUT_FILE     = Path.home() / "beegfs-thesis/img/ib_v_pcie_bw.pdf"
-IB_DATA     = Path.home() / "beegfs-thesis/bench/ib/ib_write_bw"
-PCIE_DATA    = Path.home() / "beegfs-thesis/bench/dma_bench/ex3/numa_bound"
+# File paths
+OUT_FILE  = Path.home() / "beegfs-thesis/img/ib_v_pcie_bw_write.pdf"
+IB_DATA   = Path.home() / "beegfs-thesis/benchmarks/ib/ib_write_bw"
+PCIE_DATA = Path.home() / "beegfs-thesis/benchmarks/dma_bench/ex3/numa_bound"
 
+# Configurations
 X_AXIS_LABEL = "Message size [bytes] ($\\log_{2}$)"
 Y_AXIS_LABEL = "Bandwidth [GB/s]"
+
+EXP_START = 6
+EXP_END = 24
 
 def main() -> None:
 
@@ -17,7 +21,7 @@ def main() -> None:
     fig, ax = standard_ax()
 
     # Load data
-    msg_size = powers_of_two(6, 24)
+    msg_size = powers_of_two(EXP_START, EXP_END)
     ib_data = load_csv(IB_DATA, key="BWaverage[MiB/sec]")
     pcie_data = load_dolphin(PCIE_DATA, "Bandwidth")
 
@@ -43,7 +47,7 @@ def main() -> None:
 
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)
-    set_log_byte_ticks(ax, 6, 24, rotation=45)
+    set_log_byte_ticks(ax, EXP_START, EXP_END, rotation=45)
 
     # Other settings
     ax.grid(True, which="both", linestyle="--", linewidth=0.5, alpha=0.7)
