@@ -36,8 +36,6 @@ def main() -> None:
     plot_std_fill(ax, msg_size, ex3_mean, ex3_std, palette["dis"])
     plot_std_fill(ax, msg_size, mpg_mean, mpg_std, palette["dis2"])
 
-
-
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)
     set_log_byte_ticks(ax, EXP_START, EXP_END, rotation=45)
