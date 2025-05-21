@@ -1,5 +1,5 @@
 [global]
-filename=/global/D1/100M
+filename=/global/D2/100M
 ioengine=libaio
 direct=1
 rw=read
