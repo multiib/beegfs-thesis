@@ -11,8 +11,8 @@ set -euo pipefail
 
 # ---------- CONFIG -----------------------------------------------------------
 PREFIX="throughput_vs_bs"           # hard-coded directory/prefix part of filename
-JOB_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/latency_vs_bs/job" # where the *.fio job files live
-OUTPUT_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/latency_vs_bs"
+JOB_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/${PREFIX}/job" # where the *.fio job files live
+OUTPUT_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/${PREFIX}"
 # ---------------------------------------------------------------------------
 
 # --- basic arg / sanity checks ----------------------------------------------
