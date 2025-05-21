@@ -35,16 +35,4 @@ cpy-binaries() {
         [[ "$dst" == *.ko ]] || strip --strip-unneeded "$dst"
         echo "Stripped and copied $rel to $dst"
     done
-
-    # ── Sync to remotes (rsync makes dirs for us) ─────────────────────────────
-    read -r -a LOCAL_IPS <<<"$(hostname -I)"
-    for host in "${TARGET_NODES[@]}"; do
-        printf '%s\n' "${LOCAL_IPS[@]}" | grep -qx "$host" && {
-            echo "Skipping local host $host"
-            continue
-        }
-
-        echo "Syncing to $host …"
-        rsync -az --delete --mkpath "$_TARGET_DIR/" "$USER@$host:$_TARGET_DIR/"
-    done
 }
