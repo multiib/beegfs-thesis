@@ -10,10 +10,6 @@
 #  “realall”  = module + every component (MAIN + tools)
 ###############################################################################
 
-
-# --- Configuration ---
-MGMT_NODE="mpg-2014-17"
-
 # --- Paths ---
 _BEEGFS_MODULE_DIR="/lib/modules/$(uname -r)/updates/fs/beegfs_autobuild"
 _BEEGFS_BIN_DIR="$HOME/beegfs-thesis/bin/beegfs-bin"
@@ -24,12 +20,6 @@ _BEEGFS_TARGET_DIR="/opt/beegfs/sbin"
 _MAIN_COMPONENTS=(client meta storage mgmtd helperd)
 _ALL_COMPONENTS=("${_MAIN_COMPONENTS[@]}" mon ctl fsck event-listener)
 
-# --- Check if this is the management node ---
-_is_mgmt_node() {
-    [[ $(hostname -I) == "${MGMT_NODE}" ]] && return 0
-
-    return 1
-}
 
 # --- Swap client kernel module ---
 _beegfs_swap_module() {
@@ -82,15 +72,8 @@ _beegfs_swap_driver() {
         client)
             _beegfs_swap_module "${src_dir}" "${modprobe_opts[@]}"
             ;;
-        meta|storage|helperd)
+        meta|storage|helperd|mgmtd)
             _beegfs_swap_bin "${component}" "${src_dir}"
-            ;;
-        mgmtd)
-            if _is_mgmt_node; then
-                _beegfs_swap_bin "mgmtd" "${src_dir}"
-            else
-                echo "Skipping beegfs-mgmtd swap – this is not the management node."
-            fi
             ;;
         all)
             echo "Swapping MAIN components: ${_MAIN_COMPONENTS[*]}"
