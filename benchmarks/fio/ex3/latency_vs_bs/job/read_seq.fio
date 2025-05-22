@@ -1,7 +1,7 @@
 [global]
 filename=/global/D2/100M
 ioengine=libaio
-direct=1
+direct=0
 rw=read
 time_based
 runtime=16
