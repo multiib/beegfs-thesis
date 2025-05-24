@@ -1,12 +1,12 @@
 [global]
-filename=/global/D2/100M
-ioengine=libaio
-direct=0
-rw=write
+filename=/global/D2/fio_test.$jobnum
+ioengine=psync
+direct=1
+rw=randwrite
 time_based
 runtime=16
 iodepth=1
-size=1G
+size=8G
 group_reporting
 
 [bs_1k]

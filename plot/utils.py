@@ -6,10 +6,12 @@ import matplotlib.pyplot as plt
 import csv
 import numpy as np
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Sequence, Union
 import json
 import matplotlib.figure
 from pathlib import Path
+
+
 
 
 # Constants
@@ -211,30 +213,30 @@ def load_dolphin(directory: Path, key: str) -> np.ndarray:
 
 
 
-def load_fio(json_path: Path, rw_type: str, metric_keys: List[str]) -> np.ndarray:
-    """
-    Load multiple performance metric columns from FIO JSON output.
+# def load_fio(json_path: Path, rw_type: str, metric_keys: List[str]) -> np.ndarray:
+#     """
+#     Load multiple performance metric columns from FIO JSON output.
 
-    Parameters:
-        json_path   -- path to the FIO JSON file
-        rw_type     -- 'read' or 'write'
-        metric_keys -- list of keys inside 'read' or 'write' to extract (e.g., ['iops', 'bw'])
+#     Parameters:
+#         json_path   -- path to the FIO JSON file
+#         rw_type     -- 'read' or 'write'
+#         metric_keys -- list of keys inside 'read' or 'write' to extract (e.g., ['iops', 'bw'])
 
-    Returns:
-        2D NumPy array of shape (num_jobs, num_metrics)
-    """
-    with json_path.open() as f:
-        doc = json.load(f)
+#     Returns:
+#         2D NumPy array of shape (num_jobs, num_metrics)
+#     """
+#     with json_path.open() as f:
+#         doc = json.load(f)
 
-    rows = []
-    for job in doc["jobs"]:
-        try:
-            row = [float(job[rw_type][key]) for key in metric_keys]
-            rows.append(row)
-        except (KeyError, ValueError, TypeError):
-            continue
+#     rows = []
+#     for job in doc["jobs"]:
+#         try:
+#             row = [float(job[rw_type][key]) for key in metric_keys]
+#             rows.append(row)
+#         except (KeyError, ValueError, TypeError):
+#             continue
 
-    return np.array(rows)
+#     return np.array(rows)
 
 
 # Generate numpy array of powers of two
@@ -333,3 +335,109 @@ def plot_std_fill(ax, x, mean, std, color, alpha=0.2, label=None):
         alpha=alpha,
         label=label,
     )
+
+
+
+
+
+
+
+KeyPath = Union[str, Sequence[str]]
+
+
+
+def _dig(d: dict, path: KeyPath):
+    """
+    Walk `d` following the components in `path` and return the leaf value.
+
+    Parameters
+    ----------
+    d      : dict
+        The dictionary to traverse.
+    path   : KeyPath
+        A dot-separated string (``"clat_ns.mean"``) **or** a tuple/list
+        (``("clat_ns", "mean")``).
+
+    Returns
+    -------
+    Any
+        The value at the end of the path.
+
+    Raises
+    ------
+    KeyError
+        If any component is missing.
+    """
+    if isinstance(path, str):
+        path = path.split(".")
+    for p in path:
+        d = d[p]
+    return d
+
+
+def load_fio(
+    json_path: Path,
+    rw_type: str,
+    metric_paths: List[KeyPath] = None,
+    *,
+    # backward-compatibility alias
+    metric_keys: List[KeyPath] = None
+) -> np.ndarray:
+    """
+    Load multiple performance-metric columns from an FIO JSON result.
+
+    Parameters
+    ----------
+    json_path   : pathlib.Path
+        Path to the FIO JSON file.
+    rw_type     : str
+        Either ``"read"`` or ``"write"`` – selects the per-job block to parse.
+    metric_paths : list[KeyPath], optional
+        Metrics to extract.  Each entry may be:
+
+        * A simple key (``"iops"``, ``"bw"``)
+        * A *dot* path (``"clat_ns.mean"``)
+        * A tuple/list of path components (``("clat_ns", "mean")``)
+
+        Order defines the column order in the returned array.
+
+    Keyword-only Parameters
+    -----------------------
+    metric_keys : list[KeyPath], optional
+        **Deprecated but kept for backward compatibility** – synonym for
+        *metric_paths*.  If both are provided, *metric_paths* wins.
+
+    Returns
+    -------
+    numpy.ndarray
+        Shape ``(n_jobs, len(metric_paths))`` of ``float`` values.
+
+    Notes
+    -----
+    * Jobs missing *any* requested key (or holding non-numeric data) are
+      **skipped**, mirroring the behaviour of the original function.
+    * Change the error-handling block if you prefer ``NaN`` filling instead of
+      skipping.
+    """
+    # Resolve parameter alias
+    if metric_paths is None:
+        metric_paths = metric_keys
+    if metric_paths is None:
+        raise TypeError("`metric_paths` (or `metric_keys`) must be specified.")
+
+    # --------------------------------------------------------------------- #
+    # Parse file
+    # --------------------------------------------------------------------- #
+    with json_path.open() as f:
+        doc = json.load(f)
+
+    rows = []
+    for job in doc["jobs"]:
+        try:
+            row = [float(_dig(job[rw_type], path)) for path in metric_paths]
+            rows.append(row)
+        except (KeyError, ValueError, TypeError):
+            # Skip jobs that lack any requested metric or hold non-numeric data
+            continue
+
+    return np.asarray(rows)

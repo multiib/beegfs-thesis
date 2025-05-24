@@ -10,9 +10,8 @@
 set -euo pipefail
 
 # ---------- CONFIG -----------------------------------------------------------
-PREFIX="latency_vs_bs"           # hard-coded directory/prefix part of filename
-JOB_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/${PREFIX}/job" # where the *.fio job files live
-OUTPUT_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/${PREFIX}"
+JOB_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/direct/job" # where the *.fio job files live
+OUTPUT_DIR="$HOME/beegfs-thesis/benchmarks/fio/ex3/direct/results"
 # ---------------------------------------------------------------------------
 
 # --- basic arg / sanity checks ----------------------------------------------
@@ -32,7 +31,7 @@ for jobfile in "$JOB_DIR"/*.fio; do
   [[ -e "$jobfile" ]] || { echo "No .fio files in $JOB_DIR"; exit 1; }
 
   job_base="$(basename "$jobfile" .fio)"
-  outfile="${OUTPUT_DIR}/${PREFIX}_${job_base}_${TAG}.json"
+  outfile="${OUTPUT_DIR}/${job_base}_${TAG}.json"
 
   echo "Running: $jobfile  →  $outfile"
   fio --output="$outfile" --output-format=json "$jobfile"

@@ -3,14 +3,14 @@
 from utils import *
 
 # File paths
-OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_mpg_write_seq_bw.pdf"
-ETH_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_eth.json"
-DIS_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_dis.json"
-SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throughput_vs_bs_write_seq_ssocks.json"
+OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_mpg_write_seq_lat.pdf"
+ETH_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/latency_vs_bs/latency_vs_bs_write_seq_eth.json"
+DIS_DATA     = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/latency_vs_bs/latency_vs_bs_write_seq_dis.json"
+SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/latency_vs_bs/latency_vs_bs_write_seq_ssocks.json"
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Bandwidth [MB/s]"
+Y_AXIS_LABEL = "Latency [MB/s]"
 
 EXP_START = 10
 EXP_END = 24
@@ -23,14 +23,14 @@ def main() -> None:
 
     # Load data
     msg_size = powers_of_two(EXP_START, EXP_END)
-    eth_data = load_fio(ETH_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
-    dis_data = load_fio(DIS_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
-    ssocks_data = load_fio(SSOCKS_DATA, rw_type="write", metric_keys=["bw_mean", "bw_dev"])
+    eth_data = load_fio(ETH_DATA, rw_type="write", metric_keys=["lat_ns.mean", "lat_ns.stddev"])
+    dis_data = load_fio(DIS_DATA, rw_type="write", metric_keys=["lat_ns.mean", "lat_ns.stddev"])
+    ssocks_data = load_fio(SSOCKS_DATA, rw_type="write", metric_keys=["lat_ns.mean", "lat_ns.stddev"])
 
     # Convert KB to MB (vectorized)
-    eth_data = eth_data * KB_TO_MB
-    dis_data = dis_data * KB_TO_MB
-    ssocks_data = ssocks_data * KB_TO_MB
+    eth_data = eth_data
+    dis_data = dis_data
+    ssocks_data = ssocks_data
 
     # Slice columns
     eth_mean, eth_std = eth_data[:, 0], eth_data[:, 1]
@@ -50,11 +50,6 @@ def main() -> None:
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)
     set_log_byte_ticks(ax, EXP_START, EXP_END, rotation=45)
-
-    # Plot a horizontal dashe dline at y = 292 
-    ax.axhline(y=292, linestyle="--", linewidth=2, alpha=0.7, color=palette["sisci"])
-    # add to legend
-    ax.plot([], [], linestyle="--", linewidth=2, alpha=0.7, color=palette["sisci"], label="Avg. HDD limit")
 
 
     # Other settings

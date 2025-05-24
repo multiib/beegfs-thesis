@@ -1,12 +1,12 @@
 [global]
-filename=/global/D2/100M   # File to write
-ioengine=libaio
+filename=/global/D2/fio_test.$jobnum
+ioengine=psync
 direct=0
-rw=randread
+rw=write
 time_based
 runtime=16
-iodepth=16
-size=1G
+iodepth=1
+size=8G
 group_reporting
 
 [bs_1k]
@@ -62,6 +62,13 @@ bs=4M
 stonewall
 
 [bs_8M]
+bs=8M
+stonewall
+
+[bs_16M]
+bs=16M
+stonewall
+
 bs=8M
 stonewall
 
