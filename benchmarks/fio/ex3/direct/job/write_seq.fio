@@ -69,9 +69,3 @@ stonewall
 bs=16M
 stonewall
 
-bs=8M
-stonewall
-
-[bs_16M]
-bs=16M
-stonewall
