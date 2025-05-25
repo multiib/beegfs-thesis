@@ -183,7 +183,7 @@ StandardSocket* StandardSocket_construct(int domain, int type, int protocol)
 
 StandardSocket* StandardSocket_constructUDP(void)
 {
-   return StandardSocket_construct(PF_SSOCKS, SOCK_DGRAM, 0);
+   return StandardSocket_construct(PF_INET, SOCK_DGRAM, 0);
 }
 
 StandardSocket* StandardSocket_constructTCP(void)

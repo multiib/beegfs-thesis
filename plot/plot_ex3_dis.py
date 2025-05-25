@@ -3,9 +3,9 @@
 from utils import *
 
 # File paths
-OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_ex3_write_ib.pdf"
-BUFFERED_DATA = Path.home() / "beegfs-thesis/benchmarks/fio/ex3/buffered/results/write_seq_ib.json"
-DIRECT_DATA = Path.home() / "beegfs-thesis/benchmarks/fio/ex3/direct/results/write_seq_ib.json"
+OUT_FILE     = Path.home() / "beegfs-thesis/img/fio_ex3_write_dis.pdf"
+BUFFERED_DATA = Path.home() / "beegfs-thesis/benchmarks/fio/ex3/buffered/results/write_seq_dis.json"
+DIRECT_DATA = Path.home() / "beegfs-thesis/benchmarks/fio/ex3/direct/results/write_seq_dis.json"
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
@@ -34,14 +34,14 @@ def main() -> None:
     buffered_mean, buffered_std = buffered_data[:, 0], buffered_data[:, 1]
 
     # Plot data
-    plot_line(ax, msg_size, direct_mean, color=palette["ib"], label="InfiniBand (direct)", marker="o")
-    plot_line(ax, msg_size, buffered_mean, color=palette["ib2"], label="InfiniBand (buffered)", marker="s")
+    plot_line(ax, msg_size, direct_mean, color=palette["dis"], label="IPoPCIe (direct)", marker="o")
+    plot_line(ax, msg_size, buffered_mean, color=palette["dis2"], label="IPoPCIe (buffered)", marker="s")
 
 
     # Plot std dev shaded area
-    plot_std_fill(ax, msg_size, direct_mean, direct_std, palette["ib"])
+    plot_std_fill(ax, msg_size, direct_mean, direct_std, palette["dis"])
 
-    plot_std_fill(ax, msg_size, buffered_mean, buffered_std, palette["ib2"])
+    plot_std_fill(ax, msg_size, buffered_mean, buffered_std, palette["dis2"])
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)
     set_log_byte_ticks(ax, EXP_START, EXP_END, rotation=45)

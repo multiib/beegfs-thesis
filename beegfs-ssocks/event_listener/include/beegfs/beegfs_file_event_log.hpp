@@ -27,8 +27,6 @@
 
 #define BEEGFS_EVENTLOG_BDM_PORT 6000
 
-#define AF_SSOCKS 34
-
 namespace BeeGFS {
 
 enum class FileEventType : uint32_t
@@ -405,14 +403,14 @@ class BDMClient
       bool connToBDM(const std::string& address, const int port)
       {
          //Crerating socket
-         sock_fd = socket(AF_SSOCKS, SOCK_STREAM, 0);
+         sock_fd = socket(AF_INET, SOCK_STREAM, 0);
          if(sock_fd < 0)
          {
             perror("socket create failed");
             return false;
          }
 
-         const sockaddr_in server = {.sin_family = AF_SSOCKS,
+         const sockaddr_in server = {.sin_family = AF_INET,
                                      .sin_port = htons(port),
                                     };
 

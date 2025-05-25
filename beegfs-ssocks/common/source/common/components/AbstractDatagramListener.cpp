@@ -103,12 +103,12 @@ bool AbstractDatagramListener::initSocks()
                std::shared_ptr<StandardSocket> s;
                if (udpSock == nullptr)
                {
-                  udpSock = std::make_shared<StandardSocketGroup>(PF_SSOCKS, SOCK_DGRAM);
+                  udpSock = std::make_shared<StandardSocketGroup>(PF_INET, SOCK_DGRAM);
                   s = udpSock;
                }
                else
                {
-                  s = udpSock->createSubordinate(PF_SSOCKS, SOCK_DGRAM);
+                  s = udpSock->createSubordinate(PF_INET, SOCK_DGRAM);
                }
                configSocket(s.get(), &i, bufsize);
                interfaceSocks[i.ipAddr] = s;
@@ -120,7 +120,7 @@ bool AbstractDatagramListener::initSocks()
          // no need to close down any existing unbound UDP socket, it listens to all interfaces
          if (udpSock == nullptr)
          {
-            udpSock = std::make_shared<StandardSocketGroup>(PF_SSOCKS, SOCK_DGRAM);
+            udpSock = std::make_shared<StandardSocketGroup>(PF_INET, SOCK_DGRAM);
             configSocket(udpSock.get(), NULL, bufsize);
          }
       }
