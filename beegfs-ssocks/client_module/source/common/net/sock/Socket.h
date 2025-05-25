@@ -12,7 +12,6 @@
 
 #define PF_SDP                AF_INET_SDP // the Sockets Direct Protocol (Family)
 #define SOCKET_PEERNAME_LEN   24
-
 #define PF_SSOCKS 34
 #define AF_SSOCKS PF_SSOCKS
 

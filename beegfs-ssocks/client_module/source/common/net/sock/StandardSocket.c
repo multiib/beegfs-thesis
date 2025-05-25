@@ -11,8 +11,6 @@
 #define SOCKET_SHUTDOWN_RECV_BUF_LEN         32
 #define STANDARDSOCKET_CONNECT_TIMEOUT_MS    5000
 
-
-
 static const struct SocketOps standardOps = {
    .uninit = _StandardSocket_uninit,
 
@@ -185,7 +183,7 @@ StandardSocket* StandardSocket_construct(int domain, int type, int protocol)
 
 StandardSocket* StandardSocket_constructUDP(void)
 {
-   return StandardSocket_construct(PF_INET, SOCK_DGRAM, 0);
+   return StandardSocket_construct(PF_SSOCKS, SOCK_DGRAM, 0);
 }
 
 StandardSocket* StandardSocket_constructTCP(void)
@@ -375,7 +373,7 @@ bool _StandardSocket_connectByIP(Socket* this, struct in_addr ipaddress, unsigne
 
    struct sockaddr_in serveraddr =
    {
-      .sin_family = thisCast->sockDomain,
+      .sin_family = PF_SSOCKS,
       .sin_addr = ipaddress,
       .sin_port = htons(port),
    };
@@ -561,150 +559,41 @@ ssize_t _StandardSocket_recvT(Socket* this, struct iov_iter* iter, int flags, in
 
 
 ssize_t _StandardSocket_sendto(Socket* this, struct iov_iter* iter, int flags,
-    fhgfs_sockaddr_in *to)
- {
-    StandardSocket* thisCast = (StandardSocket*)this;
-    struct socket *sock = thisCast->sock;
- 
-    int sendRes;
-    size_t len;
-    struct sockaddr_in toSockAddr;
- 
-    struct msghdr msg =
-    {
-       .msg_control      = NULL,
-       .msg_controllen   = 0,
-       .msg_flags        = flags | MSG_NOSIGNAL,
-       .msg_name         = (struct sockaddr*)(to ? &toSockAddr : NULL),
-       .msg_namelen      = sizeof(toSockAddr),
-       .msg_iter         = *iter,
-    };
- 
-    len = iov_iter_count(iter);
- 
-    // Initial state debug printing
-    printk(KERN_INFO 
-     "StandardSocket_sendto BEGIN:\n"
-     "  Function Entry Point Details:\n"
-     "    this=%p\n"
-     "    thisCast=%p\n"
-     "    sock=%p\n"
-     "    iter=%p\n"
-     "    flags=0x%x\n"
-     "    to=%p\n"
-     "  Socket Structure Details:\n"
-     "    sockType=%d\n"
-     "    peername=%s\n"
-     "    peerIP=%pI4\n"
-     "    boundPort=%d\n"
-     "    ops=%p\n"
-     "  Initial iov_iter State:\n"
-     "    len=%zu\n"
-     "    type=%d\n"
-     "    nr_segs=%zu\n"
-     "    count=%zu\n"
-     "    iov_offset=%zu\n",
-     this,
-     thisCast,
-     sock,
-     iter,
-     flags,
-     to,
-     this->sockType,
-     this->peername,
-     &this->peerIP,
-     this->boundPort,
-     this->ops,
-     len,
-     iov_iter_type(iter),
-     iter->nr_segs,
-     iter->count,
-     iter->iov_offset);
- 
-    if (to)
-    {
-       toSockAddr.sin_family = thisCast->sockDomain;
-       toSockAddr.sin_addr = to->addr;
-       toSockAddr.sin_port = to->port;
-    }
- 
-    // Pre-send debug printing
-    printk(KERN_INFO 
-     "StandardSocket_sendto PRE-SEND:\n"
-     "  Message Header Details:\n"
-     "    msg_control=%p\n"
-     "    msg_controllen=%zu\n"
-     "    msg_flags=0x%x\n"
-     "    msg_name=%p\n"
-     "    msg_namelen=%u\n"
-     "  Socket State:\n"
-     "    sockDomain=%d\n"
-     "    sk_protocol=%u\n"
-     "    sk_type=%u\n"
-     "    sk_state=%u\n"
-     "    sock->ops=%p\n"
-     "  Destination Details:%s\n",
-     msg.msg_control,
-     msg.msg_controllen,
-     msg.msg_flags,
-     msg.msg_name,
-     msg.msg_namelen,
-     thisCast->sockDomain,
-     sock->sk ? sock->sk->sk_protocol : 0,
-     sock->sk ? sock->sk->sk_type : 0,
-     sock->sk ? sock->sk->sk_state : 0,
-     sock->ops,
-     to ? kasprintf(GFP_KERNEL,
-                    " IP=%pI4, Port=%u",
-                    &toSockAddr.sin_addr,
-                    ntohs(toSockAddr.sin_port)) : " None specified");
- 
-    sendRes = beegfs_sendmsg(sock, &msg, len);
- 
-    // Post-send debug printing
-    printk(KERN_INFO 
-     "StandardSocket_sendto POST-SEND:\n"
-     "  Send Result Details:\n"
-     "    sendRes=%d\n"
-     "    errno=%d\n"
-     "  Post-Send iov_iter State:\n"
-     "    len=%zu\n"
-     "    type=%d\n"
-     "    nr_segs=%zu\n"
-     "    count=%zu\n"
-     "    iov_offset=%zu\n"
-     "  Socket Poll State:\n"
-     "    poll._events=0x%x\n"
-     "    poll.revents=0x%x\n",
-     sendRes,
-     sendRes < 0 ? -sendRes : 0,
-     iov_iter_count(iter),
-     iov_iter_type(iter),
-     iter->nr_segs,
-     iter->count,
-     iter->iov_offset,
-     this->poll._events,
-     this->poll.revents);
- 
-    if(sendRes >= 0)
-    {
-       iov_iter_advance(iter, sendRes);
-       
-       // Post-advance debug printing
-       printk(KERN_INFO 
-         "StandardSocket_sendto POST-ADVANCE:\n"
-         "  Final iov_iter State:\n"
-         "    bytes_advanced=%d\n"
-         "    remaining_count=%zu\n"
-         "    final_offset=%zu\n",
-         sendRes,
-         iov_iter_count(iter),
-         iter->iov_offset);
-    }
- 
-    printk(KERN_INFO "StandardSocket_sendto END: returning %d\n\n\n", sendRes);
-    return sendRes;
- }
+   fhgfs_sockaddr_in *to)
+{
+   StandardSocket* thisCast = (StandardSocket*)this;
+   struct socket *sock = thisCast->sock;
+
+   int sendRes;
+   size_t len;
+   struct sockaddr_in toSockAddr;
+
+   struct msghdr msg =
+   {
+      .msg_control      = NULL,
+      .msg_controllen   = 0,
+      .msg_flags        = flags | MSG_NOSIGNAL,
+      .msg_name         = (struct sockaddr*)(to ? &toSockAddr : NULL),
+      .msg_namelen      = sizeof(toSockAddr),
+      .msg_iter         = *iter,
+   };
+
+   len = iov_iter_count(iter);
+
+   if (to)
+   {
+      toSockAddr.sin_family = thisCast->sockDomain;
+      toSockAddr.sin_addr = to->addr;
+      toSockAddr.sin_port = to->port;
+   }
+
+   sendRes = beegfs_sendmsg(sock, &msg, len);
+
+   if(sendRes >= 0)
+      iov_iter_advance(iter, sendRes);
+
+   return sendRes;
+}
 
 ssize_t StandardSocket_recvfrom(StandardSocket* this, struct iov_iter* iter, int flags,
    fhgfs_sockaddr_in *from)

@@ -22,7 +22,6 @@
 #define PF_SSOCKS 34
 #define AF_SSOCKS PF_SSOCKS
 
-
 class Socket : public Channel
 {
    public:

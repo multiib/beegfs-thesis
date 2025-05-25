@@ -172,12 +172,9 @@ void __AckManager_processAckQueue(AckManager* this)
          // connect & communicate
 
          sock = NodeConnPool_acquireStreamSocket(connPool);
-         printk(KERN_INFO "Ackman acurered the socket %p\n", sock);
 
          if(likely(sock) )
          { // send msg
-            printk(KERN_INFO "AckManager\n");
-
             sendRes = Socket_send_kernel(sock, this->ackMsgBuf, msgLen, 0);
 
             if(unlikely(sendRes != (ssize_t) msgLen) )

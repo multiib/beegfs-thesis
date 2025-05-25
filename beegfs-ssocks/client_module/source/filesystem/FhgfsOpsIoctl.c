@@ -1058,8 +1058,6 @@ static long FhgfsOpsIoctl_pingNode(struct file *file, void __user *argp)
       if (sock == NULL)
       {
          sock = NodeConnPool_acquireStreamSocket(connPool);
-         printk(KERN_INFO "OPSLOCTL acurered the socket %p\n", sock);
-
          if (sock == NULL)
          {
             Logger_logFormatted(log, Log_ERR, __func__,

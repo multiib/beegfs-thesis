@@ -183,8 +183,7 @@ endif
 all: module
 	@ /bin/true
 
-module:
-
+module: $(TARGET_ALL_DEPS)
 ifeq ($(KDIR_PRUNED_HEAD),)
 	$(error Linux kernel build directory not found. Please check if\
 	the kernel module development packages are installed for the current kernel\

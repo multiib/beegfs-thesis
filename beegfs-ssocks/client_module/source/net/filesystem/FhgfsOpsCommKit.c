@@ -40,11 +40,21 @@ bool FhgfsOpsCommKit_initEmergencyPools()
    }
 
 #ifdef KERNEL_HAS_KMEMCACHE_DTOR
+   #if defined(KERNEL_HAS_SLAB_MEM_SPREAD)
    headerBufferCache = kmem_cache_create(cacheName, BEEGFS_COMMKIT_MSGBUF_SIZE, 0,
       SLAB_MEM_SPREAD, NULL, NULL);
+   #else
+   headerBufferCache = kmem_cache_create(cacheName, BEEGFS_COMMKIT_MSGBUF_SIZE, 0,
+      0, NULL, NULL);
+   #endif
 #else
+   #if defined(KERNEL_HAS_SLAB_MEM_SPREAD)
    headerBufferCache = kmem_cache_create(cacheName, BEEGFS_COMMKIT_MSGBUF_SIZE, 0,
       SLAB_MEM_SPREAD, NULL);
+   #else
+   headerBufferCache = kmem_cache_create(cacheName, BEEGFS_COMMKIT_MSGBUF_SIZE, 0,
+      0, NULL);
+   #endif
 #endif
 
    if(!headerBufferCache)
@@ -296,8 +306,6 @@ static bool __commkit_prepare_generic(CommKitContext* context, struct CommKitTar
 
    // connect
    info->socket = NodeConnPool_acquireStreamSocketEx(connPool, allowWaitForConn, &devPrioCtx);
-   printk(KERN_INFO "OPscom acurered the socket %p\n", info->socket);
-
    if(!info->socket)
    { // no conn available => error or didn't want to wait
       if(likely(!allowWaitForConn) )
@@ -355,8 +363,6 @@ static void __commkit_sendheader_generic(CommKitContext* context,
    if(BEEGFS_SHOULD_FAIL(commkit_sendheader_timeout, 1) )
       sendRes = -ETIMEDOUT;
    else
-   printk(KERN_INFO "FhgfsOpsCommKit\n");
-    
       sendRes = Socket_send_kernel(info->socket, info->headerBuffer, info->headerSize, 0);
 
    if(unlikely(sendRes != info->headerSize) )

@@ -530,8 +530,6 @@ FhgfsOpsErr __MessagingTk_requestResponseWithRRArgsComm(App* app,
 
    if (sock == NULL)
       sock = NodeConnPool_acquireStreamSocket(connPool);
-
-   printk(KERN_INFO "MessagingTK acurered the socket %p\n", sock);
    if(unlikely(!sock) )
    { // not connected
       if(!(rrArgs->logFlags & REQUESTRESPONSEARGS_LOGFLAG_CONNESTABLISHFAILED) &&
@@ -591,7 +589,6 @@ FhgfsOpsErr __MessagingTk_requestResponseWithRRArgsComm(App* app,
 
    // send request
 
-   printk(KERN_INFO "MessaginTK\n");
    sendRes = Socket_send_kernel(sock, rrArgs->outRespBuf, sendBufLen, 0);
 
    if(unlikely(sendRes != (ssize_t)sendBufLen) )

@@ -133,7 +133,7 @@ bool ConnAcceptor::initSocks()
    // TCP
    try
    {
-      tcpListenSock = new StandardSocket(PF_SSOCKS, SOCK_STREAM);
+      tcpListenSock = new StandardSocket(AF_SSOCKS, SOCK_STREAM);
       tcpListenSock->setSoReuseAddr(true);
       int bufsize = cfg->getConnTCPRcvBufSize();
       if (bufsize > 0)

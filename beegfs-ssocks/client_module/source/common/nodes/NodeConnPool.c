@@ -998,8 +998,6 @@ bool __NodeConnPool_applySocketOptionsConnected(NodeConnPool* this, Socket* sock
       sendBuf = (char*)os_kmalloc(sendBufLen);
 
       NetMessage_serialize( (NetMessage*)&authMsg, sendBuf, sendBufLen);
-      printk(KERN_INFO "NodeConn1\n");
-
       sendRes = Socket_send_kernel(sock, sendBuf, sendBufLen, 0);
       if(sendRes <= 0)
       {
@@ -1021,8 +1019,6 @@ bool __NodeConnPool_applySocketOptionsConnected(NodeConnPool* this, Socket* sock
       sendBuf = (char*)os_kmalloc(sendBufLen);
 
       NetMessage_serialize( (NetMessage*)&directMsg, sendBuf, sendBufLen);
-      printk(KERN_INFO "NodeConn2\n");
-
       sendRes = Socket_send_kernel(sock, sendBuf, sendBufLen, 0);
       if(sendRes <= 0)
       {
@@ -1046,8 +1042,6 @@ bool __NodeConnPool_applySocketOptionsConnected(NodeConnPool* this, Socket* sock
       if (sendBuf)
       {
          NetMessage_serialize(&peerInfo.netMessage, sendBuf, sendBufLen);
-
-         printk(KERN_INFO "NodeConn3\n");
          sendRes = Socket_send_kernel(sock, sendBuf, sendBufLen, 0);
       }
 

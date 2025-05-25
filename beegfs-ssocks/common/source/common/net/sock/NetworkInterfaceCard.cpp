@@ -25,7 +25,7 @@ bool NetworkInterfaceCard::findAll(StringList* allowedInterfacesList, bool useRD
    bool retVal = false;
 
    // find standard TCP/IP interfaces
-   if(findAllBySocketDomain(PF_SSOCKS, NICADDRTYPE_STANDARD, allowedInterfacesList, outList) )
+   if(findAllBySocketDomain(PF_INET, NICADDRTYPE_STANDARD, allowedInterfacesList, outList) )
       retVal = true;
 
    // find RDMA interfaces (based on TCP/IP interfaces query results)
@@ -33,7 +33,7 @@ bool NetworkInterfaceCard::findAll(StringList* allowedInterfacesList, bool useRD
    {
       NicAddressList tcpInterfaces;
 
-      findAllBySocketDomain(PF_SSOCKS, NICADDRTYPE_STANDARD, allowedInterfacesList, &tcpInterfaces);
+      findAllBySocketDomain(PF_INET, NICADDRTYPE_STANDARD, allowedInterfacesList, &tcpInterfaces);
 
       filterInterfacesForRDMA(&tcpInterfaces, outList);
    }
@@ -53,7 +53,7 @@ bool NetworkInterfaceCard::findAllInterfaces(const StringList& allowedInterfaces
    bool retVal = false;
 
    // find standard TCP/IP interfaces
-   if(findAllBySocketDomain(AF_INET, NICADDRTYPE_STANDARD, &allowedInterfacesList, &outList) )
+   if(findAllBySocketDomain(PF_INET, NICADDRTYPE_STANDARD, &allowedInterfacesList, &outList) )
       retVal = true;
 
    return retVal;
@@ -220,7 +220,7 @@ bool NetworkInterfaceCard::checkAndAddRdmaCapability(NicAddressList& nicList)
  */
 bool NetworkInterfaceCard::findByName(const char* interfaceName, NicAddress* outAddr)
 {
-   int sock = socket(PF_SSOCKS, SOCK_STREAM, IPPROTO_IP);
+   int sock = socket(PF_INET, SOCK_STREAM, IPPROTO_IP);
    if(sock == -1)
       return false;
 

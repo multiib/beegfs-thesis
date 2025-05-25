@@ -404,35 +404,32 @@ class BDMClient
 
       bool connToBDM(const std::string& address, const int port)
       {
-         // Creating socket
-         sock_fd = socket(AF_INET, SOCK_STREAM, 0);
-         if (sock_fd < 0)
+         //Crerating socket
+         sock_fd = socket(AF_SSOCKS, SOCK_STREAM, 0);
+         if(sock_fd < 0)
          {
             perror("socket create failed");
             return false;
          }
 
-         // Declare server as non-const to allow assignment
-         sockaddr_in server = {};
-         server.sin_family = AF_INET;
-         server.sin_port = htons(port);
+         const sockaddr_in server = {.sin_family = AF_SSOCKS,
+                                     .sin_port = htons(port),
+                                    };
 
          int opt = 1;
 
-         if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                        static_cast<void *>(&opt), sizeof(opt)))
+         if(setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
+            static_cast<void *>(&opt), sizeof(opt)))
          {
             perror("Unable to set socket for hive index");
             return false;
          }
       
-         in_addr_t addr = inet_addr(address.c_str());
-         if (addr == INADDR_NONE)
+         if (inet_pton(AF_INET, address.c_str(), (void *)&server.sin_addr) <= 0)
          {
             perror("Unable to convert address");
             return false;
          }
-         server.sin_addr.s_addr = addr;
 
          if (connect(sock_fd, (struct sockaddr *)&server, sizeof(server)) < 0)
          {
@@ -440,6 +437,7 @@ class BDMClient
             return false;
          }
          return true;
+
       }
 
       ~BDMClient()
@@ -447,8 +445,7 @@ class BDMClient
          if (sock_fd > 0)
             close(sock_fd);
       }
-
-      int sendData(char *data, size_t dataSize);
+      int sendData (char * data, size_t dataSize);
 };
 
 /*

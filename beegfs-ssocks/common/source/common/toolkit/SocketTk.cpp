@@ -1,10 +1,5 @@
 #include "SocketTk.h"
 
-#include <fstream>
-#include <string>
-#include <cstdlib>
-
-
 #include <sys/socket.h>
 #include <netdb.h>
 
@@ -38,7 +33,7 @@ nu::error_or<in_addr> SocketTk::getHostByName(const std::string& hostname)
 
    memset(&hint, 0, sizeof(struct addrinfo) );
    hint.ai_flags    = AI_CANONNAME;
-   hint.ai_family   = AF_INET;
+   hint.ai_family   = PF_INET;
    hint.ai_socktype = SOCK_DGRAM;
 
    int getRes = getaddrinfo(hostname.c_str(), NULL, &hint, &addressList);
@@ -70,7 +65,7 @@ std::string SocketTk::getHostnameFromIP(struct in_addr* ipAddr, bool nameRequire
 
    memset(&serv_addr, 0, sizeof(serv_addr) );
 
-   serv_addr.sin_family        = AF_INET;
+   serv_addr.sin_family        = AF_SSOCKS;
    serv_addr.sin_addr.s_addr   = ipAddr->s_addr;
 
    int getInfoFlags = 0;

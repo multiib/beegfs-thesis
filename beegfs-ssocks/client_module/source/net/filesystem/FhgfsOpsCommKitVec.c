@@ -118,8 +118,6 @@ void __FhgfsOpsCommKitVec_readfileStagePREPARE(CommKitVecHelper* commHelper,
 
    // connect
    comm->sock = NodeConnPool_acquireStreamSocketEx(connPool, true, NULL);
-   printk(KERN_INFO "Commkitvec aquiured the socket %p\n", comm->sock);
-
    if(!comm->sock)
    {  // connection error
       if (fatal_signal_pending(current))
@@ -175,7 +173,6 @@ void __FhgfsOpsCommKitVec_readfileStagePREPARE(CommKitVecHelper* commHelper,
 
    comm->nodeResult = 0; // ready to read, so set this variable to 0
 
-   printk(KERN_INFO "CommKitVec1\n");
    sendRes = Socket_send_kernel(comm->sock, comm->msgBuf, comm->hdrLen, 0);
 
 #if (BEEGFS_COMMKIT_DEBUG & COMMKIT_DEBUG_READ_SEND )
@@ -642,7 +639,6 @@ void __FhgfsOpsCommKitVec_writefileStagePREPARE(CommKitVecHelper* commHelper,
 
    // connect
    comm->sock = NodeConnPool_acquireStreamSocketEx(connPool, true, NULL);
-    printk(KERN_INFO "Commkitvec2 aquiured the socket %p\n", comm->sock);
    if(!comm->sock)
    {  // connection error
       if (fatal_signal_pending(current))
@@ -716,8 +712,6 @@ void __FhgfsOpsCommKitVec_writefileStageSENDHEADER(CommKitVecHelper* commHelper,
 
    LOG_DEBUG_TOP_FORMATTED(commHelper->log, LogTopic_COMMKIT, Log_DEBUG, __func__, "enter");
 
-   printk(KERN_INFO "CommKitVec2\n");
-
    sendRes = Socket_send_kernel(comm->sock, comm->msgBuf, comm->hdrLen, 0);
 
 #if (BEEGFS_COMMKIT_DEBUG & COMMKIT_DEBUG_WRITE_HEADER )
@@ -789,8 +783,6 @@ void __FhgfsOpsCommKitVec_writefileStageSENDDATA(CommKitVecHelper* commHelper,
       data = fhgfsPage->data;
 
       // send dataPart blocking
-
-      printk(KERN_INFO "CommKitVec3\n");
       sendDataPartRes = Socket_send_kernel(comm->sock, data, dataLength, 0);
 
       LOG_DEBUG_TOP_FORMATTED(commHelper->log, LogTopic_COMMKIT, Log_DEBUG, __func__,
