@@ -65,7 +65,7 @@ std::string SocketTk::getHostnameFromIP(struct in_addr* ipAddr, bool nameRequire
 
    memset(&serv_addr, 0, sizeof(serv_addr) );
 
-   serv_addr.sin_family        = AF_SSOCKS;
+   serv_addr.sin_family        = AF_INET;
    serv_addr.sin_addr.s_addr   = ipAddr->s_addr;
 
    int getInfoFlags = 0;
