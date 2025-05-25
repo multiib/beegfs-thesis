@@ -1,6 +1,6 @@
 [global]
-filename=/global/D2/fio_test.$jobnum
-ioengine=psync
+filename=/global/D2/ffile
+ioengine=libaido
 direct=0
 rw=randwrite
 time_based
