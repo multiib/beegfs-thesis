@@ -1,6 +1,6 @@
 [global]
 filename=/global/D2/ffile
-ioengine=libaido
+ioengine=libaio
 direct=0
 rw=read
 time_based

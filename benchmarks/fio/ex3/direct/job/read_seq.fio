@@ -1,6 +1,6 @@
 [global]
 filename=/global/D2/fio_test.$jobnum
-ioengine=psync
+ioengine=libaio
 direct=1
 rw=read
 time_based
