@@ -97,7 +97,7 @@ std::shared_ptr<Node> NodesTk::downloadNodeInfo(const std::string& hostname,
    {
       try
       {
-         StandardSocket socket(PF_SSOCKS, SOCK_STREAM);
+         StandardSocket socket(AF_INET, SOCK_STREAM);
 
          socket.connect(hostname.c_str(), port);
 
