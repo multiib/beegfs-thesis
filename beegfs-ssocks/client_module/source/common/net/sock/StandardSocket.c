@@ -373,7 +373,7 @@ bool _StandardSocket_connectByIP(Socket* this, struct in_addr ipaddress, unsigne
 
    struct sockaddr_in serveraddr =
    {
-      .sin_family = AF_INET,
+      .sin_family = AF_SSOCKS,
       .sin_addr = ipaddress,
       .sin_port = htons(port),
    };
