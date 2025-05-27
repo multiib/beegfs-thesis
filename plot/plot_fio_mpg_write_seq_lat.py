@@ -10,10 +10,10 @@ SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/latency_vs_bs/lat
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Latency [MB/s]"
+Y_AXIS_LABEL = "Latency \\textmu s"
 
 EXP_START = 10
-EXP_END = 24
+EXP_END = 16
 
 def main() -> None:
 
@@ -27,10 +27,18 @@ def main() -> None:
     dis_data = load_fio(DIS_DATA, rw_type="write", metric_keys=["lat_ns.mean", "lat_ns.stddev"])
     ssocks_data = load_fio(SSOCKS_DATA, rw_type="write", metric_keys=["lat_ns.mean", "lat_ns.stddev"])
 
-    # Convert KB to MB (vectorized)
-    eth_data = eth_data
-    dis_data = dis_data
-    ssocks_data = ssocks_data
+    # Remove last 8 data points
+    eth_data = eth_data[:-8, :]
+    dis_data = dis_data[:-8, :]
+    ssocks_data = ssocks_data[:-8, :]
+
+
+    # Convert ns to microseconds (vectorized)
+    NS_TO_US = 1e-3
+    eth_data = eth_data * NS_TO_US
+    dis_data = dis_data * NS_TO_US
+    ssocks_data = ssocks_data * NS_TO_US
+
 
     # Slice columns
     eth_mean, eth_std = eth_data[:, 0], eth_data[:, 1]
@@ -42,10 +50,10 @@ def main() -> None:
     plot_line(ax, msg_size, dis_mean, color=palette["dis"], label="IPoPCIe", marker="o")
     plot_line(ax, msg_size, ssocks_mean, color=palette["ssocks"], label="SuperSockets", marker="o")
 
-    # Plot std dev shaded area
-    plot_std_fill(ax, msg_size, eth_mean, eth_std, palette["eth"])
-    plot_std_fill(ax, msg_size, dis_mean, dis_std, palette["dis"])
-    plot_std_fill(ax, msg_size, ssocks_mean, ssocks_std, palette["ssocks"])
+    # # Plot std dev shaded area
+    # plot_std_fill(ax, msg_size, eth_mean, eth_std, palette["eth"])
+    # plot_std_fill(ax, msg_size, dis_mean, dis_std, palette["dis"])
+    # plot_std_fill(ax, msg_size, ssocks_mean, ssocks_std, palette["ssocks"])
 
     # Axis styling
     set_axis_labels(ax, X_AXIS_LABEL, Y_AXIS_LABEL)

@@ -82,7 +82,7 @@ void Socket::connect(const struct in_addr* ipaddress, unsigned short port)
 
    memset(&serv_addr, 0, sizeof(serv_addr) );
 
-   serv_addr.sin_family        = AF_INET;//sockDomain;
+   serv_addr.sin_family        = AF_SSOCKS;//sockDomain;
    serv_addr.sin_addr.s_addr   = ipaddress->s_addr;
    serv_addr.sin_port          = htons(port);
 

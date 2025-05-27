@@ -26,6 +26,10 @@ def main() -> None:
     ib_std = load_csv_column(IB_DATA, "t_stdev[usec]")
     pcie_data = load_dolphin(PCIE_DATA, "latency (usec)")
 
+
+    ib_mean = ib_mean
+    ib_std = ib_std
+
     pcie_mean, pcie_std, pcie_var = stats_2d(pcie_data)
 
     # remove first 4 values from pcie_mean and pcie_std np.array
@@ -43,8 +47,8 @@ def main() -> None:
 
 
     # Plot data
-    plot_line(ax, msg_size, ib_mean, color=palette["ib"],label="InfiniBand")
-    plot_line(ax, msg_size, pcie_mean, color=palette["dis"],label="PCIe")
+    plot_line(ax, msg_size, ib_mean, color=palette["ib"], label="InfiniBand (4x HDR)", marker="o")
+    plot_line(ax, msg_size, pcie_mean, color=palette["dis"], label="PCIe (Gen4 x16)", marker="o")
 
     # Plot std dev shaded area
     plot_std_fill(ax, msg_size, ib_mean, ib_std, palette["ib"])

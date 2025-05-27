@@ -3,9 +3,9 @@
 from utils import *
 
 # File paths
-OUT_FILE         = Path.home() / "beegfs-thesis/img/dma_bench_numa.pdf"
+OUT_FILE         = Path.home()  /"beegfs-thesis/img/dma_bench_numa.pdf"
 NUMA_BOUND_DIR   = Path.home() / "beegfs-thesis/benchmarks/dma_bench/ex3/numa_bound"
-NUMA_DEFAULT_DIR = Path.home() / "beegfs-thesis/benchmarks/dma_bench/ex3/numa_default"
+NUMA_DEFAULT_DIR = Path.home()/  "beegfs-thesis/benchmarks/dma_bench/ex3/numa_default"
 
 # Configurations
 X_AXIS_LABEL = "Message size [bytes] ($\\log_{2}$)"
