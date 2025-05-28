@@ -3,7 +3,7 @@
 # Server-side cmd:
 # numactl --cpunodebind=1 qperf -lp 18515
 
-IP="10.128.20.8"
+IP="192.168.4.8"
 PORT="18515"
 TESTS="tcp_bw tcp_lat"
 OUTDIR="$HOME/beegfs-thesis/benchmarks/qperf/dis"
@@ -17,7 +17,7 @@ for ((exp=2; exp<=24; exp++)); do
     size=$((2**exp))
     echo "Testing message size $size..."
 
-    OUTPUT=$(numactl --cpunodebind=1 qperf -m "$size" $IP -lp $PORT $TESTS)
+    OUTPUT=$(qperf -m "$size" $IP -lp $PORT $TESTS)
 
     LINE="$size"
     for TEST in $TESTS; do
