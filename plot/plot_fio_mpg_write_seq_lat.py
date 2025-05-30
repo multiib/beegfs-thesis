@@ -10,7 +10,7 @@ SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/latency_vs_bs/lat
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Latency \\textmu s"
+Y_AXIS_LABEL = "Latency [\\textmu s]"
 
 EXP_START = 10
 EXP_END = 16
@@ -46,9 +46,9 @@ def main() -> None:
     ssocks_mean, ssocks_std = ssocks_data[:, 0], ssocks_data[:, 1]
 
     # Plot data
-    plot_line(ax, msg_size, eth_mean, color=palette["eth"], label="TCP Ethernet", marker="o")
-    plot_line(ax, msg_size, dis_mean, color=palette["dis"], label="IPoPCIe", marker="o")
-    plot_line(ax, msg_size, ssocks_mean, color=palette["ssocks"], label="SuperSockets", marker="o")
+    plot_line(ax, msg_size, eth_mean, color=palette["eth"], label="TCP Ethernet (1Gbps)", marker="o")
+    plot_line(ax, msg_size, dis_mean, color=palette["dis"], label="IPoPCIe (PCIe Gen3 x8)", marker="o")
+    plot_line(ax, msg_size, ssocks_mean, color=palette["ssocks"], label="SuperSockets (PCIe Gen3 x8)", marker="o")
 
     # # Plot std dev shaded area
     # plot_std_fill(ax, msg_size, eth_mean, eth_std, palette["eth"])

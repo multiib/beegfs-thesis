@@ -10,7 +10,7 @@ SSOCKS_DATA  = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Bandwidth [MB/s]"
+Y_AXIS_LABEL = "Throughput [MB/s]"
 
 EXP_START = 10
 EXP_END = 24
@@ -38,9 +38,9 @@ def main() -> None:
     ssocks_mean, ssocks_std = ssocks_data[:, 0], ssocks_data[:, 1]
 
     # Plot data
-    plot_line(ax, msg_size, eth_mean, color=palette["eth"], label="TCP Ethernet", marker="o")
-    plot_line(ax, msg_size, dis_mean, color=palette["dis"], label="IPoPCIe", marker="o")
-    plot_line(ax, msg_size, ssocks_mean, color=palette["ssocks"], label="SuperSockets", marker="o")
+    plot_line(ax, msg_size, eth_mean, color=palette["eth"], label="TCP Ethernet (1Gbps)", marker="o")
+    plot_line(ax, msg_size, dis_mean, color=palette["dis"], label="IPoPCIe (PCIe Gen3 x8)", marker="o")
+    plot_line(ax, msg_size, ssocks_mean, color=palette["ssocks"], label="SuperSockets (PCIe Gen3 x8)", marker="o")
 
     # Plot std dev shaded area
     plot_std_fill(ax, msg_size, eth_mean, eth_std, palette["eth"])
@@ -54,7 +54,7 @@ def main() -> None:
     # Plot a horizontal dashe dline at y = 292 
     ax.axhline(y=292, linestyle="--", linewidth=2, alpha=0.7, color=palette["sisci"])
     # add to legend
-    ax.plot([], [], linestyle="--", linewidth=2, alpha=0.7, color=palette["sisci"], label="Avg. HDD limit")
+    ax.plot([], [], linestyle="--", linewidth=2, alpha=0.7, color=palette["sisci"], label="Avg. combined HDD limit")
 
 
     # Other settings

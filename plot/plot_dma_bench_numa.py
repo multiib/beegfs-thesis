@@ -9,7 +9,7 @@ NUMA_DEFAULT_DIR = Path.home()/  "beegfs-thesis/benchmarks/dma_bench/ex3/numa_de
 
 # Configurations
 X_AXIS_LABEL = "Message size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Bandwidth [GB/s]"
+Y_AXIS_LABEL = "Throughput [GB/s]"
 
 EXP_START = 6
 EXP_END   = 24

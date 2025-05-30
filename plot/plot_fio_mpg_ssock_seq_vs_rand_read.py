@@ -9,7 +9,7 @@ SSOCKS1 = Path.home() / "beegfs-thesis/benchmarks/fio/mpg/throughput_vs_bs/throu
 
 # Configurations
 X_AXIS_LABEL = "Block size [bytes] ($\\log_{2}$)"
-Y_AXIS_LABEL = "Bandwidth [MB/s]"
+Y_AXIS_LABEL = "Throughput [MB/s]"
 
 EXP_START = 10
 EXP_END = 24
